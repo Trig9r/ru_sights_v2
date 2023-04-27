@@ -1,0 +1,38 @@
+.map_container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.tint {
+  position: absolute;
+  top: 0;
+  left: auto;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: var(--font-family-side);
+  font-size: 26px;
+  font-weight: var(--font-medium);
+  color: transparent;
+
+  user-select: none;
+
+  transition: all 0.3s;
+}
+
+.tint:hover {
+  color: var(--color-white);
+  text-shadow: 1px 1px 1px var(--color-dark-grey);
+}
+
+/* YMaps {
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15);
+} */

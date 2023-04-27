@@ -1,0 +1,47 @@
+.button {
+  width: 250px;
+  height: 60px;
+  background-color: transparent;
+  border: 3px solid #eeeeee;
+  font-family: var(--font-family-main), sans-serif;
+  color: var(--color-white);
+  font-size: 24px;
+
+  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+
+  cursor: pointer;
+
+  transition: all var(--transition);
+}
+
+.button:hover {
+  backdrop-filter: blur(3px);
+}
+
+.button:active {
+  background-color: #a9a9a9;
+}
+
+.button_primary {
+  width: 280px;
+  height: 70px;
+
+  background-color: var(--color-dark-grey);
+  border: 3px solid var(--color-white);
+  font-family: var(--font-family-main), sans-serif;
+  color: var(--color-white);
+  font-size: 22px;
+
+  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.button_primary:hover {
+  background-color: var(--color-white);
+  color: var(--color-dark-grey);
+  border: 3px solid var(--color-dark-grey);
+
+  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.35));
+}

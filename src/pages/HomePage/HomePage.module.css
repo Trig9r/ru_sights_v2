@@ -1,0 +1,149 @@
+.offer_container {
+  margin-top: 80px;
+}
+
+.sights_container {
+  width: 100%;
+  height: 1200px;
+  background-color: #b4b4b4;
+}
+
+.sight_content {
+  max-width: 1366px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sight_content .title {
+  max-width: 665px;
+
+  font-family: var(--font-family-main);
+  font-size: 32px;
+  line-height: 48px;
+  text-align: center;
+  color: #1f1f1f;
+
+  padding-top: 42px;
+}
+
+.big_cities_cards_container {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.little_cities_cards_container {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.sight_content Button {
+  margin: 50px auto;
+}
+
+.sight_types_container {
+  background-color: #8a8a8a;
+}
+
+.sight_types_content {
+  max-width: 1366px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 82px;
+}
+
+.sight_types_content .title {
+  font-family: var(--font-family-main);
+  font-size: 32px;
+  color: var(--color-white);
+
+  margin-top: 45px;
+}
+
+.types_container {
+  margin-top: 60px;
+
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.about_us_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.about_us_content {
+  margin: 0 auto;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  background-color: #b4b4b4;
+}
+
+.left_img {
+  min-width: 469px;
+  min-height: 440px;
+
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--left-img);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.right_img {
+  min-width: 468px;
+  min-height: 440px;
+
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--right-img);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.text_container {
+  max-width: 430px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--color-white);
+}
+
+.text_container .title {
+  font-family: var(--font-family-main);
+  font-size: 28px;
+
+  margin-top: 50px;
+}
+
+.text_container .main_text {
+  font-family: var(--font-family-side);
+  font-weight: var(--font-medium);
+  font-size: 18px;
+  line-height: 149.2%;
+
+  margin: 50px 29px 29px 30px;
+
+  text-align: center;
+}
+
+.button {
+  width: 200px;
+  height: 45px;
+  font-size: 16px;
+}

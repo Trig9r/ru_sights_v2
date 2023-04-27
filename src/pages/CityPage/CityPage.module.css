@@ -1,0 +1,162 @@
+.main_container {
+  margin: 0 auto;
+  margin-top: 80px;
+  background-color: var(--page-dark-grey-color);
+}
+
+.title_container {
+  width: 100%;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  position: relative;
+
+  font-family: var(--font-family-main);
+  color: var(--color-white);
+}
+
+.img_container {
+  width: 100%;
+  height: 320px;
+  position: relative;
+}
+
+.cityImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img_tint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  z-index: 0;
+}
+
+.title_container .title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  font-size: 36px;
+}
+
+.title_container .navbar {
+  font-size: 20px;
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -70%);
+  user-select: none;
+}
+
+.input_container {
+  margin-top: 55px;
+  margin-left: 20px;
+}
+
+.search_icon {
+  vertical-align: bottom;
+}
+
+.input {
+  width: 520px;
+  height: 40px;
+  margin-left: 10px;
+
+  font-family: var(--font-family-side);
+  color: var(--color-white);
+  font-size: 18px;
+
+  border: none;
+  background-color: var(--page-dark-grey-color);
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.input:active,
+.input:focus {
+  outline: none;
+  caret-color: #cfcfcf;
+}
+
+.search_container {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.dropdown {
+  width: 230px;
+  height: 45px;
+  background-color: #d9d9d9;
+  color: #505050;
+
+  margin-left: 60px;
+
+  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.button_find {
+  width: 200px;
+  height: 50px;
+
+  font-size: 20px;
+  padding-top: 2px;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: #ababab;
+  margin-top: 30px;
+}
+
+.sights_container {
+  margin-top: 50px;
+  margin-bottom: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.text_container {
+  height: 30vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #8a8a8a;
+}
+
+.no_context {
+  max-width: 600px;
+  text-align: center;
+  margin-top: 30px;
+
+  font-family: var(--font-family-side);
+  font-weight: var(--font-light);
+  font-size: 30px;
+  color: #dbdbdb;
+}

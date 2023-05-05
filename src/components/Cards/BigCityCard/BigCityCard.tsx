@@ -1,4 +1,7 @@
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
+
+import { BigSkeleton } from '../Skeletons';
 
 import sightIcon from './img/sightIcon.svg';
 import peopleIcon from './img/peopleIcon.svg';
@@ -21,29 +24,37 @@ export const BigCityCard: React.FC<BigCityCardProps> = ({
   countPeople,
   countViews,
 }) => {
+  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: true });
+
   return (
-    <div className={style.card_container}>
-      <div className={style.img_container}>
-        <img src={imgUrl} alt={cityName} className={style.city_img} />
-        <div className={style.img_tint} />
-        <span className={style.city_name}>{cityName}</span>
-      </div>
-      <div className={style.info_container}>
-        <div className={style.city_info}>
-          <img src={sightIcon} alt="sightIcon" />
-          <span className={style.count_sight}>Кол-во дост.: {countSight}</span>
-        </div>
+    <div ref={ref} className={style.card_container}>
+      {inView ? (
+        <>
+          <div className={style.img_container}>
+            <img src={imgUrl} alt={cityName} className={style.city_img} />
+            <div className={style.img_tint} />
+            <span className={style.city_name}>{cityName}</span>
+          </div>
+          <div className={style.info_container}>
+            <div className={style.city_info}>
+              <img src={sightIcon} alt="sightIcon" />
+              <span className={style.count_sight}>Кол-во дост.: {countSight}</span>
+            </div>
 
-        <div className={style.city_info}>
-          <img src={peopleIcon} alt="peopleIcon" />
-          <span className={style.count_people}>Численность: {countPeople}</span>
-        </div>
+            <div className={style.city_info}>
+              <img src={peopleIcon} alt="peopleIcon" />
+              <span className={style.count_people}>Численность: {countPeople}</span>
+            </div>
 
-        <div className={style.city_info}>
-          <img src={eyeIcon} alt="eyeIcon" />
-          <span className={style.count_views}>Кол-во просмотров: {countViews}</span>
-        </div>
-      </div>
+            <div className={style.city_info}>
+              <img src={eyeIcon} alt="eyeIcon" />
+              <span className={style.count_views}>Кол-во просмотров: {countViews}</span>
+            </div>
+          </div>
+        </>
+      ) : (
+        <BigSkeleton />
+      )}
     </div>
   );
 };

@@ -19,11 +19,13 @@
     "paths": {
       // "@/*": ["./src/*"],
       "@/components": ["./src/components"],
+      "@/constants/api": ["./src/constants/api"],
       "@/styles": ["./src/styles"],
       "@/pages": ["./src/pages"],
       "@/components/UI": ["./src/components/UI"],
       "@/components/Cards": ["./src/components/Cards"],
       "@/utils/futures": ["./src/utils/futures"],
+      "@/utils/helpers": ["./src/utils/helpers"],
       "@/utils/hooks": ["./src/utils/hooks"],
       "@/utils/api/hooks": ["./src/utils/api/hooks"],
       "@/@types": ["./src/@types/assets.d.ts"],

@@ -6,3 +6,4 @@ export * from './CityPage';
 export * from './AboutUsPage';
 export * from './FavoritePage';
 export * from './SightPage';
+export * from './TestAddPage(deepai)';

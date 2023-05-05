@@ -5,8 +5,11 @@ import styles from './Dropdown.module.css';
 
 interface DropdownProps {
   placeholder: string;
-  cities: any;
+  elements: any;
+  selectedValue: string | null;
+  setSelectedElement: React.Dispatch<React.SetStateAction<null | string>>;
   classnames?: any;
+  isSearchable?: boolean;
 }
 
 const DropdownIcon = () => {
@@ -27,11 +30,19 @@ const DropdownIcon = () => {
   );
 };
 
-export const Dropdown: React.FC<DropdownProps> = ({ placeholder, cities, classnames }) => {
-  const [selectedValue, setSelectedValue] = React.useState<string | null>(null);
+export const Dropdown: React.FC<DropdownProps> = ({
+  placeholder,
+  elements,
+  selectedValue,
+  setSelectedElement,
+  classnames,
+  isSearchable = false,
+}) => {
+  const [isVisible, setIsVisible] = React.useState(false);
+
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [value, setValue] = React.useState<string>('');
-  const [isVisible, setIsVisible] = React.useState(false);
+
   const cityRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -47,9 +58,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ placeholder, cities, classna
   }, []);
 
   const onClickCity = (name: any) => {
-    setSelectedValue(name);
-    const value = selectedValue;
-    // onChange();
+    setSelectedElement(name);
     setIsVisible(false);
   };
 
@@ -87,10 +96,12 @@ export const Dropdown: React.FC<DropdownProps> = ({ placeholder, cities, classna
 
         {isVisible && (
           <div className={styles.menu}>
-            <div className={styles.search_container}>
-              <input type="search" placeholder="Поиск" onChange={onSearch} value={value} />
-            </div>
-            {cities
+            {isSearchable && (
+              <div className={styles.search_container}>
+                <input type="search" placeholder="Поиск" onChange={onSearch} value={value} />
+              </div>
+            )}
+            {elements
               .filter(({ name }: { name: string }) =>
                 name.toLowerCase().includes(searchValue.toLowerCase()),
               )

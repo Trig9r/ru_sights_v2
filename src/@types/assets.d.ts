@@ -17,6 +17,7 @@ export interface CityTypes {
   count_sights: number;
   count_people: string;
   count_views: number;
+  map_points: MapTypes;
   imgUrl: string;
 }
 

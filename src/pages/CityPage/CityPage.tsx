@@ -67,16 +67,20 @@ export const CityPage = () => {
           <div className={style.dropdown_container}>
             <Dropdown
               placeholder="По просмотрам"
-              cities={[{ city_name: 'По названию' }, { city_name: 'По дате добавления' }]}
+              elements={[{ name: 'По названию' }, { name: 'По дате добавления' }]}
               classnames={style.dropdown}
+              setSelectedElement={() => {}}
+              selectedValue={null}
             />
           </div>
 
           <div className={style.dropdown_container}>
             <Dropdown
               placeholder={sightType}
-              cities={[{ city_name: 'По названию' }, { city_name: 'По дате добавления' }]}
+              elements={[{ name: 'По названию' }, { name: 'По дате добавления' }]}
               classnames={style.dropdown}
+              setSelectedElement={() => {}}
+              selectedValue={sightType}
             />
           </div>
         </div>
@@ -96,24 +100,18 @@ export const CityPage = () => {
         )}
 
         <div className={style.sights_container}>
-          <div className={style.card_container}>
-            {isLoading
-              ? Array(6)
-                  .fill('')
-                  .map(() => <BigSkeleton key={Math.random()} />)
-              : sights
-                  .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
-                  .map((sight: SightTypes) => (
-                    <SightCard
-                      key={sight.name}
-                      id={sight.id}
-                      onClick={() => navigate(`/достопримечательность/${sight.name}`)}
-                      sightName={sight.name}
-                      imgUrl={sight.imgUrl}
-                      views={sight.count_views}
-                    />
-                  ))}
-          </div>
+          {sights
+            .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
+            .map((sight: SightTypes) => (
+              <SightCard
+                key={sight.name}
+                id={sight.id}
+                onClick={() => navigate(`/достопримечательность/${sight.name}`)}
+                sightName={sight.name}
+                imgUrl={sight.imgUrl}
+                views={sight.count_views}
+              />
+            ))}
         </div>
       </div>
       <Footer />

@@ -16,26 +16,28 @@ export const Menu: React.FC<MenuProps> = ({ menuActive, setActive }) => {
       <div className={style.blur} />
       <div className={style.menu_content} onClick={(e) => e.stopPropagation()}>
         <ul>
-          <Link to="/">
-            <li onClick={() => setActive(false)}>Главная</li>
-          </Link>
+          <li onClick={() => setActive(false)}>
+            <Link to="/">Главная</Link>
+          </li>
 
-          <Link to="/города">
-            <li onClick={() => setActive(false)}>Города</li>
-          </Link>
+          <li onClick={() => setActive(false)}>
+            <Link to="/города">Города</Link>
+          </li>
 
           <li onClick={() => setActive(false)}>Достопримечательности</li>
-          <Link to="/избранное">
-            <li onClick={() => setActive(false)}>Избранное</li>
-          </Link>
 
-          <Link to="/aboutUs">
-            <li onClick={() => setActive(false)}>О нас</li>
-          </Link>
+          <li onClick={() => setActive(false)}>
+            <Link to="/избранное">Избранное</Link>
+          </li>
 
-          <Link to="/addNewSight">
-            <li onClick={() => setActive(false)}>Добавить</li>
-          </Link>
+          <li onClick={() => setActive(false)}>
+            <Link to="/aboutUs">О нас</Link>
+          </li>
+
+          <li onClick={() => setActive(false)}>
+            <Link to="/addNewSight">Добавить</Link>
+          </li>
+
           <li onClick={() => setActive(false)}>FAQ</li>
         </ul>
       </div>

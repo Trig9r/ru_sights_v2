@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Footer, YMap } from '@/components';
 import { Button, Dropdown, Input } from '@/components/UI';
@@ -34,19 +34,34 @@ interface CityArray {
 }
 
 export const AddSightPage = () => {
+  const navigate = useNavigate();
+
   const [sightValue, setSightValue] = React.useState({
     name: '',
     desc: '',
   });
   const [formErrors, setFormErrors] = React.useState<{ [key: string]: string | null }>({
     name: '',
+    desc: '',
   });
 
-  const [selectedCity, setSelectedCity] = React.useState<null | string>(null);
-  const [selectedType, setSelectedType] = React.useState<null | string>(null);
+  const [selectedCity, setSelectedCity] = React.useState<{
+    id: null | number;
+    name: null | string;
+  }>({ id: null, name: null });
+
+  const [selectedType, setSelectedType] = React.useState<{
+    id: null | number;
+    name: null | string;
+  }>({ id: null, name: null });
+
+  const [placemarkCoords, setPlacemarkCoords] = React.useState({ X: null, Y: null });
 
   const [selectedImages, setSelectedImages] = React.useState<FileList | null>(null);
   const [imagePreviews, setImagePreviews] = React.useState<string[]>([]);
+
+  const [isLoadingPost, setIsLoadingPost] = React.useState(false);
+  const [backendErrors, setBackendErrors] = React.useState('');
 
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
@@ -55,7 +70,7 @@ export const AddSightPage = () => {
   // получение города пользователя через геолокацию
   const userCity = getUserCityName();
   React.useEffect(() => {
-    setSelectedCity(userCity);
+    setSelectedCity({ id: null, name: userCity });
   }, [userCity]);
 
   if (isError || !data) return <div>loading...</div>;
@@ -63,7 +78,7 @@ export const AddSightPage = () => {
   const { cities } = data;
 
   // координаты x и y на карте по выбранному городу
-  const mapCity = cities.filter((city) => city.name === selectedCity);
+  const mapCity = cities.filter((city) => city.name === selectedCity.name);
 
   // отфильтрованные города с нужными ключими для dropdown
   const filteredCities = useFilteredCities(cities);
@@ -82,15 +97,26 @@ export const AddSightPage = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoadingPost(false);
 
-    if (!selectedImages) {
-      console.log('No files selected.');
-      return;
-    }
+    const validationRules = [
+      { condition: sightValue.name === '', errorMessage: 'Название не может быть пустым' },
+      { condition: !selectedCity, errorMessage: 'Выберите город' },
+      { condition: sightValue.desc === '', errorMessage: 'Описание не может быть пустым' },
+      {
+        condition: !placemarkCoords.X && !placemarkCoords.Y,
+        errorMessage: 'Выберите точку на карте',
+      },
+      { condition: !selectedType, errorMessage: 'Выберите тип достопримечательности' },
+      { condition: !selectedImages, errorMessage: 'Выберите картинки' },
+    ];
 
-    const formData = new FormData();
-    for (let i = 0; i < selectedImages.length; i++) {
-      formData.append('images[]', selectedImages[i]);
+    for (let i = 0; i < validationRules.length; i++) {
+      const { condition, errorMessage } = validationRules[i];
+      if (condition) {
+        setBackendErrors(errorMessage);
+        return;
+      }
     }
 
     try {
@@ -103,27 +129,43 @@ export const AddSightPage = () => {
       if (!!isProfanity) {
         alert('В описании или названии присутсвует ругательство');
       } else {
-        alert('найс');
+        const formData = new FormData();
+        formData.append('sightName', sightValue.name);
+        formData.append('sightCityId', String(selectedCity.id));
+        formData.append('sightDesc', sightValue.desc);
+        formData.append('sightMapCoordsX', String(placemarkCoords.X));
+        formData.append('sightMapCoordsY', String(placemarkCoords.Y));
+        formData.append('sightTypeId', String(selectedType.id));
+        for (let i = 0; i < selectedImages!.length; i++) {
+          formData.append('images[]', selectedImages![i]);
+        }
+
+        // отправка данных с формы на rest api
+        try {
+          setIsLoadingPost(true);
+
+          const response = await axios.post(
+            'http://localhost/sight_api/sights/img_upload.php',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          );
+
+          // console.log('Files uploaded successfully: ', response.data);
+          setIsLoadingPost(false);
+          navigate(`/достопримечательность/${sightValue.name}`);
+        } catch (error) {
+          const { response } = error as AxiosError;
+          const { data } = response as AxiosResponse;
+
+          setBackendErrors(data.message);
+        }
       }
     } catch (error) {
       console.error('webpurify error:', error);
-    }
-
-    // отправка данных с формы на rest api
-    try {
-      const response = await axios.post(
-        'http://localhost/sight_api/sights/img_upload.php',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        },
-      );
-
-      console.log('Files uploaded successfully: ', response.data);
-    } catch (error) {
-      console.error('Failed to upload files:', error);
     }
   };
 
@@ -159,7 +201,7 @@ export const AddSightPage = () => {
               placeholder="Город"
               elements={filteredCities}
               selectedValue={selectedCity}
-              setSelectedElement={(name) => setSelectedCity(name)}
+              setSelectedElement={({ id, name }) => setSelectedCity({ id: id, name: name })}
               isSearchable
             />
           </div>
@@ -190,6 +232,8 @@ export const AddSightPage = () => {
                 pointX={mapCity[0]?.map_points.x ?? 37.6177}
                 pointY={mapCity[0]?.map_points.y ?? 55.7559}
                 zoom={10}
+                placemark={placemarkCoords}
+                setPlacemark={(coords) => setPlacemarkCoords(coords)}
                 isTouchable
               />
             </div>
@@ -199,22 +243,25 @@ export const AddSightPage = () => {
             <Dropdown
               placeholder="Тип"
               elements={[
-                { name: TYPES.MUSEUMS },
-                { name: TYPES.MONUMENTS },
-                { name: TYPES.PARKS },
-                { name: TYPES.THEATERS },
-                { name: TYPES.CHURCHES },
-                { name: TYPES.BUILDINGS },
-                { name: TYPES.NATURAL },
-                { name: TYPES.OTHER },
+                { id: 1, name: TYPES.MUSEUMS },
+                { id: 2, name: TYPES.MONUMENTS },
+                { id: 3, name: TYPES.PARKS },
+                { id: 4, name: TYPES.THEATERS },
+                { id: 5, name: TYPES.CHURCHES },
+                { id: 6, name: TYPES.BUILDINGS },
+                { id: 7, name: TYPES.NATURAL },
+                { id: 8, name: TYPES.OTHER },
               ]}
               selectedValue={selectedType}
-              setSelectedElement={(name) => setSelectedType(name)}
+              setSelectedElement={({ id, name }) => setSelectedType({ id: id, name: name })}
             />
           </div>
 
           <div className={style.button_photo_container}>
-            <Button classnames={style.button_photo} onClick={() => inputFileRef.current?.click()}>
+            <Button
+              type="button"
+              classnames={style.button_photo}
+              onClick={() => inputFileRef.current?.click()}>
               Добавить фото
             </Button>
             <span>Кол-во: {selectedImages?.length ?? 0}</span>
@@ -236,9 +283,14 @@ export const AddSightPage = () => {
           </div>
 
           <div className={style.button_submit_container}>
-            <Button type="submit" classnames={style.button_submit} primary>
+            <Button
+              type="submit"
+              classnames={style.button_submit}
+              primary
+              isLoading={isLoadingPost}>
               Добавить
             </Button>
+            <span style={{ color: 'red', marginTop: '20px' }}>{backendErrors}</span>
           </div>
         </form>
       </div>

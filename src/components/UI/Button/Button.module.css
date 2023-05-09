@@ -26,6 +26,10 @@
   width: 280px;
   height: 70px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   background-color: var(--color-dark-grey);
   border: 3px solid var(--color-white);
   font-family: var(--font-family-main), sans-serif;
@@ -44,4 +48,63 @@
   border: 3px solid var(--color-dark-grey);
 
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.35));
+}
+
+.button_primary:disabled {
+  background-color: var(--color-white);
+  color: var(--color-dark-grey);
+  border: 3px solid var(--color-dark-grey);
+
+  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.35));
+}
+
+.dot_flashing {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 5px;
+  background-color: var(--color-dark-grey);
+  color: var(--color-dark-grey);
+  animation: dotFlashing 0.5s infinite linear alternate;
+  animation-delay: 0.25s;
+}
+
+.dot_flashing::before,
+.dot_flashing::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot_flashing::before {
+  left: -10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 5px;
+  background-color: var(--color-dark-grey);
+  color: var(--color-dark-grey);
+  animation: dotFlashing 0.5s infinite linear alternate;
+  animation-delay: 0s;
+}
+
+.dot_flashing::after {
+  left: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 5px;
+  background-color: var(--color-dark-grey);
+  color: var(--color-dark-grey);
+  animation: dotFlashing 0.5s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  50%,
+  100% {
+    background-color: var(--color-dark-grey);
+  }
 }

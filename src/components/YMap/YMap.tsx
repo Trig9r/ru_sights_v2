@@ -3,11 +3,18 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 
 import style from './YMap.module.css';
 
+type Placemark = {
+  X: null;
+  Y: null;
+};
+
 interface YMapProps {
   width: string;
   height: string;
   pointX: number;
   pointY: number;
+  placemark?: Placemark;
+  setPlacemark?: React.Dispatch<React.SetStateAction<Placemark>>;
   zoom: number;
   isTouchable?: boolean;
 }
@@ -17,20 +24,22 @@ export const YMap: FC<YMapProps> = ({
   height,
   pointX,
   pointY,
+  placemark,
+  setPlacemark,
   zoom,
   isTouchable = false,
 }) => {
   const [points, setPoints] = useState({ X: pointX, Y: pointY });
-  const [placemarkCoords, setPlacemarkCoords] = useState({ X: null, Y: null });
 
   useEffect(() => {
     setPoints({ X: pointX, Y: pointY });
-  }, [pointX, pointY, zoom]);
+  }, [pointX, pointY]);
 
   const handleClickMap = (e: any) => {
     const coords = e.get('coords');
-    setPlacemarkCoords({ X: coords[0], Y: coords[1] });
-    console.log(coords);
+    setPlacemark({ X: coords[0], Y: coords[1] });
+    setPoints({ X: coords[1], Y: coords[0] });
+    // console.log(coords);
   };
 
   const deleteTint = () => {
@@ -50,11 +59,11 @@ export const YMap: FC<YMapProps> = ({
           width={width}
           height={height}
           state={{
-            center: [placemarkCoords.X || points.Y, placemarkCoords.Y || points.X],
+            center: [points.Y, points.X],
             zoom: zoom,
           }}
           onClick={isTouchable ? handleClickMap : ''}>
-          <Placemark geometry={[placemarkCoords.X || points.Y, placemarkCoords.Y || points.X]} />
+          <Placemark geometry={[placemark?.X || points.Y, placemark?.Y || points.X]} />
         </Map>
       </YMaps>
     </div>

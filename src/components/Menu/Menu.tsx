@@ -35,7 +35,7 @@ export const Menu: React.FC<MenuProps> = ({ menuActive, setActive }) => {
           </li>
 
           <li onClick={() => setActive(false)}>
-            <Link to="/addNewSight">Добавить</Link>
+            <Link to="/новаяДост">Добавить</Link>
           </li>
 
           <li onClick={() => setActive(false)}>FAQ</li>

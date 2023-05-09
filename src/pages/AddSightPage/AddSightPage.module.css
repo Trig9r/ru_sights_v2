@@ -96,6 +96,11 @@
 
 .button_submit_container {
   width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 40px;
 }
 
 .button_submit {
@@ -103,8 +108,7 @@
   height: 50px;
 
   font-size: 20px;
-
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 .dropdown_type_container,

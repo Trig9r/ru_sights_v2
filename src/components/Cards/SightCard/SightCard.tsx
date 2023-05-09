@@ -23,7 +23,7 @@ interface SightCardProps {
 }
 
 export const SightCard: React.FC<SightCardProps> = ({ id, imgUrl, sightName, views, onClick }) => {
-  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   const liked = getLocalStorage('store').some((sight: SightTypes) => sight.id === id);
   const [isLiked, setIsLiked] = React.useState(liked);
@@ -55,7 +55,7 @@ export const SightCard: React.FC<SightCardProps> = ({ id, imgUrl, sightName, vie
     <div ref={ref} className={style.card_container} onClick={onClick}>
       {inView ? (
         <div className={style.img_container}>
-          <img src={imgUrl} alt={sightName} className={style.sight_img} />
+          <img src={`/public/upload/${imgUrl}`} alt={sightName} className={style.sight_img} />
           <div className={style.img_tint} />
           <span className={style.sight_name}>{sightName}</span>
           <div className={style.views_container}>

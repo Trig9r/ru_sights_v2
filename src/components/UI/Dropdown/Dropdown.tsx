@@ -6,11 +6,16 @@ import styles from './Dropdown.module.css';
 interface DropdownProps {
   placeholder: string;
   elements: any;
-  selectedValue: string | null;
-  setSelectedElement: React.Dispatch<React.SetStateAction<null | string>>;
+  selectedValue: SelectedValueType;
+  setSelectedElement: React.Dispatch<React.SetStateAction<SelectedValueType>>;
   classnames?: any;
   isSearchable?: boolean;
 }
+
+type SelectedValueType = {
+  id: null | number;
+  name: null | string;
+};
 
 const DropdownIcon = () => {
   return (
@@ -57,8 +62,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
-  const onClickCity = (name: any) => {
-    setSelectedElement(name);
+  const onClickCity = (id: number, name: string) => {
+    setSelectedElement({ id, name });
     setIsVisible(false);
   };
 
@@ -67,7 +72,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       return false;
     }
 
-    return selectedValue == cityName;
+    return selectedValue.name == cityName;
   };
 
   const updateSearchValue = React.useCallback(
@@ -86,7 +91,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
     <>
       <div className={`${styles.container} ${classnames ? classnames : ''}`} ref={cityRef}>
         <div className={styles.input} onClick={() => setIsVisible(!isVisible)}>
-          <div className={styles.selected_value}>{selectedValue ?? placeholder}</div>
+          <div className={styles.selected_value}>{selectedValue?.name ?? placeholder}</div>
           <div className={styles.tools}>
             <div className={styles.tool}>
               <DropdownIcon />
@@ -105,9 +110,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
               .filter(({ name }: { name: string }) =>
                 name.toLowerCase().includes(searchValue.toLowerCase()),
               )
-              .map(({ name }: { name: string }) => (
+              .map(({ id, name }: { id: number; name: string }) => (
                 <div
-                  onClick={() => onClickCity(name)}
+                  onClick={() => onClickCity(id, name)}
                   key={name}
                   className={`${styles.menu_item} ${isSelected(name) && styles.selected}`}>
                   {name}

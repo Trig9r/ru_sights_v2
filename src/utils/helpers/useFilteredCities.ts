@@ -6,6 +6,7 @@ export const useFilteredCities = (cities: CityTypes[]) => {
     // Создаем новый объект, содержащий только необходимые ключи и их значения
     const filteredCity = {} as CityTypes;
     if (city.hasOwnProperty('name')) {
+      filteredCity['id'] = city['id'];
       filteredCity['name'] = city['name'];
     }
 

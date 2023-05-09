@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<HomePage />} />
       <Route path="/города" element={<CitiesPage />} />
       <Route path="/города/:name" element={<CityPage />} />
-      <Route path="/addNewSight" element={<AddSightPage />} />
+      <Route path="/новаяДост" element={<AddSightPage />} />
       <Route path="/достопримечательности/:type" element={<SightTypesPage />} />
       <Route path="/aboutUs" element={<AboutUsPage />} />
       <Route path="/избранное" element={<FavoritePage />} />

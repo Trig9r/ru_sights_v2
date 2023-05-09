@@ -32,8 +32,6 @@ export const SightPage = () => {
 
   const { images, sight } = data;
 
-  // console.log(data);
-
   return (
     <div className={style.container}>
       <div className={style.title_container}>
@@ -52,7 +50,7 @@ export const SightPage = () => {
                 .map(() => <div className={style.img_container}>{<ImgSkeleton />}</div>)
             : images.map((img) => (
                 <div className={style.img_container} key={img.id}>
-                  <img src={img.imgUrl} alt="img" />
+                  <img src={`../public/upload/${img.imgUrl}`} alt="img" />
                 </div>
               ))}
         </div>
@@ -93,8 +91,8 @@ export const SightPage = () => {
         <YMap
           height="600px"
           width="75%"
-          pointX={sight.map_points['x']}
-          pointY={sight.map_points['y']}
+          pointX={sight.map_points.x}
+          pointY={sight.map_points.y}
           zoom={16}
         />
       </div>

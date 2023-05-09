@@ -13,6 +13,7 @@ export interface SightTypes {
 }
 
 export interface CityTypes {
+  id: number;
   name: string;
   count_sights: number;
   count_people: string;

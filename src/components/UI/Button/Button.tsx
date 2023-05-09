@@ -20,7 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
       className={`${primary ? styles.button_primary : styles.button} ${classnames ?? ''}`}
       disabled={isLoading}
       {...props}>
-      {children}
+      {isLoading ? <div className={styles.dot_flashing} /> : children}
     </button>
   );
 };

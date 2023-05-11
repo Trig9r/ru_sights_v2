@@ -56,6 +56,7 @@ export const AddSightPage = () => {
   }>({ id: null, name: null });
 
   const [placemarkCoords, setPlacemarkCoords] = React.useState({ X: null, Y: null });
+  const [sightAddress, setSightAddress] = React.useState('');
 
   const [selectedImages, setSelectedImages] = React.useState<FileList | null>(null);
   const [imagePreviews, setImagePreviews] = React.useState<string[]>([]);
@@ -133,6 +134,7 @@ export const AddSightPage = () => {
         formData.append('sightName', sightValue.name);
         formData.append('sightCityId', String(selectedCity.id));
         formData.append('sightDesc', sightValue.desc);
+        formData.append('sightAddress', sightAddress);
         formData.append('sightMapCoordsX', String(placemarkCoords.X));
         formData.append('sightMapCoordsY', String(placemarkCoords.Y));
         formData.append('sightTypeId', String(selectedType.id));
@@ -234,6 +236,8 @@ export const AddSightPage = () => {
                 zoom={10}
                 placemark={placemarkCoords}
                 setPlacemark={(coords) => setPlacemarkCoords(coords)}
+                address={sightAddress}
+                setAddress={(adress) => setSightAddress(adress)}
                 isTouchable
               />
             </div>

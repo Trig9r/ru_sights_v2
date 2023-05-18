@@ -159,12 +159,12 @@ export const YMap: React.FC<YMapProps> = ({
             options={{
               iconImageSize: [30, 30],
               draggable: true,
-              preset: 'islands#greenIcon',
+              preset: 'islands#redIcon',
               hideIconOnBalloonOpen: false,
               openEmptyHint: true,
             }}
             properties={{
-              iconContent: '+',
+              iconContent: '',
               hintContent: address,
             }}
           />

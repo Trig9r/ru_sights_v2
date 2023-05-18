@@ -16,11 +16,11 @@ import {
   AboutUsPage,
   FavoritePage,
   SightPage,
+  UpdateSightPage,
 } from '@/pages';
 import { Header } from '@/components';
 
 import './App.css';
-import { setLocalStorage } from './utils';
 
 const queryClient = new QueryClient();
 
@@ -35,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="/aboutUs" element={<AboutUsPage />} />
       <Route path="/избранное" element={<FavoritePage />} />
       <Route path="/достопримечательность/:name" element={<SightPage />} />
+      <Route path="/достопримечательность/:name/изменить" element={<UpdateSightPage />} />
     </Route>,
   ),
 );

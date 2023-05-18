@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
-import viewsIcon from './img/views.svg';
-import waletIcon from './img/walet.svg';
-import placeIcon from './img/place.svg';
-import likesIcon from './img/likes.svg';
-import calendarIcon from './img/calendar.svg';
+import viewsIcon from '@/styles/static/icons/views.svg';
+import waletIcon from '@/styles/static/icons/walet.svg';
+import placeIcon from '@/styles/static/icons/place.svg';
+import likesIcon from '@/styles/static/icons/likes.svg';
+import calendarIcon from '@/styles/static/icons/calendar.svg';
+import changeIcon from '@/styles/static/icons/change.svg';
 
 import { Footer, YMap } from '@/components';
 import { ImgSkeleton } from './ImgSkeleton';
@@ -24,6 +25,7 @@ interface SightObject {
 }
 
 export const SightPage = () => {
+  const navigate = useNavigate();
   const { name } = useParams<keyof SightParams>() as SightParams;
 
   const { data, isLoading, isError } = useSight<SightObject>(name);
@@ -50,35 +52,44 @@ export const SightPage = () => {
                 .map(() => <div className={style.img_container}>{<ImgSkeleton />}</div>)
             : images.map((img) => (
                 <div className={style.img_container} key={img.id}>
-                  <img src={`../public/upload/${img.imgUrl}`} alt="img" />
+                  <img src={`/upload/${img.imgUrl}`} alt="img" />
                 </div>
               ))}
         </div>
 
-        <div className={style.info_content}>
-          <div className={style.info_container} title="Кол-во просмотров">
-            <img src={viewsIcon} alt="viewsIcon" />
-            <span className={style.count_views}>{sight.count_views}</span>
+        <div>
+          <div className={style.info_content}>
+            <div className={style.info_container} title="Кол-во просмотров">
+              <img src={viewsIcon} alt="viewsIcon" />
+              <span className={style.count_views}>{sight.count_views}</span>
+            </div>
+
+            <div className={style.info_container} title="Кол-во в избранном">
+              <img src={likesIcon} alt="likesIcon" />
+              <span className={style.count_likes}>{sight.count_favorite}</span>
+            </div>
+
+            <div className={style.info_container} title="Местонахождение">
+              <img src={placeIcon} alt="placeIcon" />
+              <span className={style.place_text}>{sight.street}</span>
+            </div>
+
+            <div className={style.info_container} title="Платно">
+              <img src={waletIcon} alt="waletIcon" />
+              <span>да</span>
+            </div>
+
+            <div className={style.info_container} title="Дата добавления">
+              <img src={calendarIcon} alt="calendarIcon" />
+              <span>{sight.created}</span>
+            </div>
           </div>
 
-          <div className={style.info_container} title="Кол-во в избранном">
-            <img src={likesIcon} alt="likesIcon" />
-            <span className={style.count_likes}>{sight.count_favorite}</span>
-          </div>
-
-          <div className={style.info_container} title="Местонахождение">
-            <img src={placeIcon} alt="placeIcon" />
-            <span className={style.place_text}>{sight.street}</span>
-          </div>
-
-          <div className={style.info_container} title="Платно">
-            <img src={waletIcon} alt="waletIcon" />
-            <span>да</span>
-          </div>
-
-          <div className={style.info_container} title="Дата добавления">
-            <img src={calendarIcon} alt="calendarIcon" />
-            <span>{sight.created}</span>
+          <div
+            className={style.change_container}
+            onClick={() => navigate(`/достопримечательность/${sight.name}/изменить`)}>
+            <img src={changeIcon} alt="changeIcon" />
+            <span>Редактировать</span>
           </div>
         </div>
       </div>

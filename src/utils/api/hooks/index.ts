@@ -1,3 +1,4 @@
+export * from './useCity';
 export * from './useСities';
 export * from './useSight';
 export * from './useSightTypes';

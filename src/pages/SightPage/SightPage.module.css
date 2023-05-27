@@ -99,6 +99,44 @@
 
   margin-top: 30px;
   margin-left: 35px;
+  margin-bottom: 30px;
+}
+
+.rating_container {
+  display: flex;
+  justify-content: center;
+
+  vertical-align: text-top;
+
+  font-family: var(--font-family-side);
+  font-size: 22px;
+  font-weight: var(--font-light);
+  color: var(--color-white);
+  margin-bottom: 18px;
+}
+
+.likes_container,
+.dislikes_container {
+  display: flex;
+  align-items: end;
+}
+
+.likes_container {
+  margin-right: 18px;
+}
+
+.likes_container span {
+  margin-right: 8px;
+}
+
+.likes_container img {
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.dislikes_container img {
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .change_container:hover {

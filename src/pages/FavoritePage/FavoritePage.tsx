@@ -1,10 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Footer } from '@/components';
 import { SightCard } from '@/components/Cards';
 import { useStore } from '@/store';
-import type { SightTypes } from '@/@types';
 
 import style from './FavoritePage.module.css';
 
@@ -17,7 +15,9 @@ export const FavoritePage = () => {
     <div className={style.container}>
       <div className={style.title_container}>
         <div className={style.title}>ИЗБРАННОЕ</div>
-        <div className={style.navbar}>Главная / Избранное</div>
+        <div className={style.navbar}>
+          <Link to="/">Главная</Link> / Избранное
+        </div>
       </div>
       {favoriteSights.length === 0 ? (
         <div className={style.text_container}>
@@ -28,7 +28,7 @@ export const FavoritePage = () => {
       ) : (
         <div className={style.sights_container}>
           <div className={style.card_container}>
-            {favoriteSights.map((sight: SightTypes) => (
+            {favoriteSights.map((sight) => (
               <SightCard
                 key={sight.name}
                 id={sight.id}

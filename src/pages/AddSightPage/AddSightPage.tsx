@@ -2,25 +2,20 @@ import React from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Footer, YMap } from '@/components';
+import { Footer, Modal, YMap } from '@/components';
 import { Button, Dropdown, Input } from '@/components/UI';
 import { useCities } from '@/utils/api/hooks';
 import { getUserCityName, useFilteredCities } from '@/utils/helpers';
+
+import { TYPES } from '@/constants';
 import { API_WEBPURIFY, WEBPURIFY_FORMAT } from '@/constants/api';
 import { CityTypes } from '@/@types';
 
 import style from './AddSightPage.module.css';
 
-const TYPES = {
-  MUSEUMS: 'Музеи',
-  MONUMENTS: 'Памятники',
-  PARKS: 'Парки',
-  THEATERS: 'Театры',
-  CHURCHES: 'Храмы',
-  BUILDINGS: 'Здания',
-  NATURAL: 'Природные',
-  OTHER: 'Другое',
-};
+interface CityArray {
+  cities: CityTypes[];
+}
 
 const validateLoginForm = (name: string, value: string) => {
   if (!value) {
@@ -28,10 +23,6 @@ const validateLoginForm = (name: string, value: string) => {
   }
   return null;
 };
-
-interface CityArray {
-  cities: CityTypes[];
-}
 
 export const AddSightPage = () => {
   const navigate = useNavigate();
@@ -63,6 +54,7 @@ export const AddSightPage = () => {
 
   const [isLoadingPost, setIsLoadingPost] = React.useState(false);
   const [backendErrors, setBackendErrors] = React.useState('');
+  const [isActiveModal, setIsActiveModal] = React.useState(false);
 
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
@@ -142,12 +134,12 @@ export const AddSightPage = () => {
           formData.append('images[]', selectedImages![i]);
         }
 
-        // отправка данных с формы на rest api
+        // отправка данных с формы на rest api ресура
         try {
           setIsLoadingPost(true);
 
           const response = await axios.post(
-            'http://localhost/sight_api/sights/img_upload.php',
+            'http://localhost/sight_api/sights/create.php',
             formData,
             {
               headers: {
@@ -158,7 +150,7 @@ export const AddSightPage = () => {
 
           // console.log('Files uploaded successfully: ', response.data);
           setIsLoadingPost(false);
-          navigate(`/достопримечательность/${sightValue.name}`);
+          // setIsActiveModal(true);
         } catch (error) {
           const { response } = error as AxiosError;
           const { data } = response as AxiosResponse;
@@ -169,6 +161,10 @@ export const AddSightPage = () => {
     } catch (error) {
       console.error('webpurify error:', error);
     }
+  };
+
+  const handleCloseModal = () => {
+    setIsActiveModal(false);
   };
 
   return (
@@ -202,7 +198,7 @@ export const AddSightPage = () => {
             <Dropdown
               placeholder="Город"
               elements={filteredCities}
-              selectedValue={selectedCity}
+              selectedValue={selectedCity.name}
               setSelectedElement={({ id, name }) => setSelectedCity({ id: id, name: name })}
               isSearchable
             />
@@ -246,17 +242,9 @@ export const AddSightPage = () => {
           <div className={style.dropdown_type_container}>
             <Dropdown
               placeholder="Тип"
-              elements={[
-                { id: 1, name: TYPES.MUSEUMS },
-                { id: 2, name: TYPES.MONUMENTS },
-                { id: 3, name: TYPES.PARKS },
-                { id: 4, name: TYPES.THEATERS },
-                { id: 5, name: TYPES.CHURCHES },
-                { id: 6, name: TYPES.BUILDINGS },
-                { id: 7, name: TYPES.NATURAL },
-                { id: 8, name: TYPES.OTHER },
-              ]}
-              selectedValue={selectedType}
+              selectedValue={selectedType.name}
+              elements={TYPES}
+              classnames={style.dropdown}
               setSelectedElement={({ id, name }) => setSelectedType({ id: id, name: name })}
             />
           </div>
@@ -291,14 +279,24 @@ export const AddSightPage = () => {
               type="submit"
               classnames={style.button_submit}
               primary
-              isLoading={isLoadingPost}>
+              isLoading={isLoadingPost}
+              onClick={() => setIsActiveModal(true)}>
               Добавить
             </Button>
             <span style={{ color: 'red', marginTop: '20px' }}>{backendErrors}</span>
           </div>
         </form>
       </div>
+
       <Footer />
+
+      {/* <Modal
+        title="Переход"
+        active={isActiveModal}
+        onClose={handleCloseModal}
+        onSubmit={() => navigate(`/достопримечательность/${sightValue.name}`)}>
+        <div>Перейти на добавленную достопримечательность?</div>
+      </Modal> */}
     </div>
   );
 };

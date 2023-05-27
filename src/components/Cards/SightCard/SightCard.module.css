@@ -37,7 +37,6 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  z-index: 2;
   transition: all var(--transition);
 }
 
@@ -55,7 +54,6 @@
   font-weight: var(--font-semi-bold);
   font-size: 30px;
   color: var(--color-white);
-  z-index: 3;
 }
 
 .views_container {
@@ -65,8 +63,6 @@
 
   display: flex;
   align-items: center;
-
-  z-index: 3;
 }
 
 .views_container span {
@@ -82,6 +78,4 @@
   position: absolute;
   top: 7px;
   right: 10px;
-
-  z-index: 4;
 }

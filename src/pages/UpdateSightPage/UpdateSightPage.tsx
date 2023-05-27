@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import viewsIcon from '@/styles/static/icons/views.svg';
 import waletIcon from '@/styles/static/icons/walet.svg';
@@ -12,6 +13,7 @@ import plusIcon from '@/styles/static/icons/plus.svg';
 import { Footer, YMap } from '@/components';
 import { ImgSkeleton } from '../SightPage/ImgSkeleton';
 import { useSight } from '@/utils/api/hooks';
+import { API_WEBPURIFY, WEBPURIFY_FORMAT } from '@/constants/api';
 import type { SightTypes, ImgTypes } from '@/@types';
 
 import style from './UpdateSightPage.module.css';
@@ -48,6 +50,8 @@ export const UpdateSightPage = () => {
 
   const [selectedImages, setSelectedImages] = React.useState<FileList | null>(null);
   const [imagePreviews, setImagePreviews] = React.useState<string[]>([]);
+  const [isLoadingPost, setIsLoadingPost] = React.useState(false);
+  const [backendErrors, setBackendErrors] = React.useState('');
 
   React.useEffect(() => {
     if (data?.images) {
@@ -92,7 +96,60 @@ export const UpdateSightPage = () => {
     }
   };
 
-  console.log(sightValue.desc);
+  const updateSightValue = async () => {
+    try {
+      const { data } = await axios.get(
+        `${API_WEBPURIFY}&text=${sightValue.desc}&${WEBPURIFY_FORMAT}`,
+      );
+      console.log(data);
+      const isProfanity = Number(data.rsp.found);
+
+      if (!!isProfanity) {
+        alert('В описании или названии присутсвует ругательство');
+      } else {
+        const formData = new FormData();
+        formData.append('sightId', String(sight.id));
+        formData.append('sightName', sightValue.name!);
+        formData.append('sightDesc', sightValue.desc!);
+        formData.append('sightCityId', String(sight.city_id));
+        formData.append('sightAddress', sightAddress!);
+        formData.append('sightMapCoordsX', String(placemarkCoords.X));
+        formData.append('sightMapCoordsY', String(placemarkCoords.Y));
+        formData.append('sightTypeId', String(sight.category_id));
+        if (selectedImages) {
+          for (let i = 0; i < selectedImages!.length; i++) {
+            formData.append('images[]', selectedImages![i]);
+          }
+        }
+
+        // отправка данных с формы на rest api ресура
+        try {
+          setIsLoadingPost(true);
+
+          const response = await axios.post(
+            'http://localhost/sight_api/sights/update.php',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          );
+
+          console.log('Files uploaded successfully: ', response.data);
+          setIsLoadingPost(false);
+          navigate(`/достопримечательность/${sightValue.name}`);
+        } catch (error) {
+          const { response } = error as AxiosError;
+          const { data } = response as AxiosResponse;
+
+          setBackendErrors(data.message);
+        }
+      }
+    } catch (error) {
+      console.error('webpurify error:', error);
+    }
+  };
 
   return (
     <div className={style.container}>
@@ -155,9 +212,12 @@ export const UpdateSightPage = () => {
             </div>
           </div>
 
-          <div className={style.change_container} onClick={() => navigate(-1)}>
+          <div className={style.change_container} onClick={() => updateSightValue()}>
             <img src={saveIcon} alt="saveIcon" />
-            <span>Сохранить</span>
+            <span>{isLoading ? 'Подождите, идёт загрузка' : 'Сохранить'}</span>
+            {backendErrors && (
+              <span style={{ color: 'red', marginTop: '20px' }}>{backendErrors}</span>
+            )}
           </div>
         </div>
       </div>

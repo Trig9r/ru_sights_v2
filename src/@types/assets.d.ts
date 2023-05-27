@@ -4,7 +4,10 @@ export interface SightTypes {
   description: string;
   street: string;
   count_views: number;
+  category_id: number;
   count_favorite: number;
+  likes: number;
+  dislikes: number;
   imgUrl: string;
   city_id?: number;
   city_name?: string;

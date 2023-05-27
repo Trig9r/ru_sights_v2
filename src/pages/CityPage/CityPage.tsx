@@ -5,9 +5,10 @@ import searchIcon from './img/searchIcon.svg';
 
 import { Footer } from '@/components';
 import { BigSkeleton, SightCard } from '@/components/Cards';
-import { Button, Dropdown, SearchInput } from '@/components/UI';
-import { useSightCity } from '@/utils/api/hooks';
+import { Dropdown, SearchInput } from '@/components/UI';
+import { useCity, useSightCity } from '@/utils/api/hooks';
 import type { SightTypes } from '@/@types';
+import { CATEGORIES, TYPES } from '@/constants';
 
 import style from './CityPage.module.css';
 
@@ -25,29 +26,50 @@ interface DataObject {
 
 export const CityPage = () => {
   const navigate = useNavigate();
+
   const [searchValue, setSearchValue] = React.useState('');
   const [value, setValue] = React.useState('');
-  const [sightType, setSightType] = React.useState('Все');
+  const [selectedType, setSelectedType] = React.useState<{
+    id: string;
+    name: null | string;
+  }>({ id: '', name: null });
+  const [selectedCategory, setSelectedCategory] = React.useState<{
+    id: string;
+    name: null | string;
+  }>({ id: 'count_views', name: null });
+  const [sortByASC, setSortByASC] = React.useState(false);
 
   const { name } = useParams<keyof CityParams>() as CityParams;
-  const { data, isLoading, isError } = useSightCity<DataObject>(name);
 
-  if (isError || !data) return <div>loading...</div>;
+  const { data, isLoading, isError } = useSightCity<DataObject>(
+    name,
+    selectedType.id,
+    selectedCategory.id,
+    sortByASC,
+  );
+  const {
+    data: city,
+    isLoading: isLoadingCity,
+    isError: isErrorCity,
+  } = useCity<DataObject['city']>(name);
 
-  const { city, sights } = data;
-  const emptySights = sights.length === 0;
+  if (isError || isErrorCity) return <div>Ошибка загрузки данных</div>;
 
-  // console.log(data);
+  const emptySights = data?.sights.length === 0;
+
+  const filteredSights = data?.sights.filter(({ name }) =>
+    name.toLowerCase().includes(searchValue.toLowerCase()),
+  );
 
   return (
     <div className={style.main_container}>
       <div className={style.title_container}>
         <div className={style.img_container}>
-          <img src={city.imgUrl} alt="city" className={style.cityImg} />
+          <img src={city?.imgUrl} alt="city" className={style.cityImg} />
           <div className={style.img_tint} />
-          <div className={style.title}>{city.name}</div>
+          <div className={style.title}>{city?.name}</div>
           <div className={style.navbar}>
-            <Link to="/">главная</Link> / <Link to="/города">города</Link> / {city.name}
+            <Link to="/">главная</Link> / <Link to="/города">города</Link> / {city?.name}
           </div>
         </div>
       </div>
@@ -66,53 +88,61 @@ export const CityPage = () => {
 
           <div className={style.dropdown_container}>
             <Dropdown
-              placeholder="По просмотрам"
-              elements={[{ name: 'По названию' }, { name: 'По дате добавления' }]}
+              placeholder="Сортировка"
+              selectedValue={selectedCategory.name}
+              elements={CATEGORIES}
               classnames={style.dropdown}
-              setSelectedElement={() => {}}
-              selectedValue={null}
+              setSelectedElement={({ id, name }) => setSelectedCategory({ id: id, name: name })}
+              setSort={() => setSortByASC(!sortByASC)}
+              isSortable
             />
           </div>
 
           <div className={style.dropdown_container}>
             <Dropdown
-              placeholder={sightType}
-              elements={[{ name: 'По названию' }, { name: 'По дате добавления' }]}
+              placeholder="Тип дост-ти"
+              selectedValue={selectedType.name}
+              elements={[{ id: '', name: 'Все' }, ...TYPES]}
               classnames={style.dropdown}
-              setSelectedElement={() => {}}
-              selectedValue={sightType}
+              setSelectedElement={({ id, name }) => setSelectedType({ id: id, name: name })}
             />
           </div>
         </div>
-        <div className={style.button_container}>
-          <Button primary classnames={style.button_find}>
-            Найти
-          </Button>
-        </div>
+
         <div className={style.line} />
 
-        {emptySights && (
-          <div className={style.text_container}>
-            <div className={style.no_context}>
-              Пока что нет ни одной достопримечательности для этого города
-            </div>
+        {isLoading ? (
+          <div className={style.sights_container}>
+            {Array(6)
+              .fill('')
+              .map((_, id) => (
+                <BigSkeleton key={id} />
+              ))}
           </div>
+        ) : (
+          <>
+            {emptySights ? (
+              <div className={style.text_container}>
+                <div className={style.no_context}>
+                  Пока что нет ни одной достопримечательности для этого города
+                </div>
+              </div>
+            ) : (
+              <div className={style.sights_container}>
+                {filteredSights?.map((sight: SightTypes) => (
+                  <SightCard
+                    key={sight.name}
+                    id={sight.id}
+                    onClick={() => navigate(`/достопримечательность/${sight.name}`)}
+                    sightName={sight.name}
+                    imgUrl={sight.imgUrl}
+                    views={sight.count_views}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
-
-        <div className={style.sights_container}>
-          {sights
-            .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
-            .map((sight: SightTypes) => (
-              <SightCard
-                key={sight.name}
-                id={sight.id}
-                onClick={() => navigate(`/достопримечательность/${sight.name}`)}
-                sightName={sight.name}
-                imgUrl={sight.imgUrl}
-                views={sight.count_views}
-              />
-            ))}
-        </div>
       </div>
       <Footer />
     </div>

@@ -19,18 +19,19 @@
     "paths": {
       // "@/*": ["./src/*"],
       "@/components": ["./src/components"],
+      "@/constants": ["./src/constants"],
       "@/constants/api": ["./src/constants/api"],
-      "@/styles/*": ["./src/styles/*"],
-      "@/styles": ["./src/styles"],
-      "@/pages": ["./src/pages"],
       "@/components/UI": ["./src/components/UI"],
       "@/components/Cards": ["./src/components/Cards"],
+      "@/pages": ["./src/pages"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/styles": ["./src/styles"],
+      "@/store": ["./src/store"],
+      "@/@types": ["./src/@types/assets.d.ts"],
       "@/utils/futures": ["./src/utils/futures"],
       "@/utils/helpers": ["./src/utils/helpers"],
       "@/utils/hooks": ["./src/utils/hooks"],
-      "@/utils/api/hooks": ["./src/utils/api/hooks"],
-      "@/@types": ["./src/@types/assets.d.ts"],
-      "@/store": ["./src/store"]
+      "@/utils/api/hooks": ["./src/utils/api/hooks"]
     }
   },
   "include": ["src"],

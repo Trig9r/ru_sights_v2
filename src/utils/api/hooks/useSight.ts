@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const useSight = <T>(name: string) => {
   return useQuery({
-    queryKey: ['sight'],
+    queryKey: ['sight', name],
     queryFn: async () => {
       const { data } = await axios.get<T>(
         `http://localhost/sight_api/sights/read_one.php?name=${name}`,

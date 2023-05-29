@@ -137,6 +137,7 @@ export const CityPage = () => {
                     sightName={sight.name}
                     imgUrl={sight.imgUrl}
                     views={sight.count_views}
+                    likes={sight.likes}
                   />
                 ))}
               </div>

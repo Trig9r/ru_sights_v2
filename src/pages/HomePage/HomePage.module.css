@@ -11,7 +11,6 @@
 .sight_content {
   max-width: 1366px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,13 +18,11 @@
 
 .sight_content .title {
   max-width: 665px;
-
   font-family: var(--font-family-main);
   font-size: 32px;
   line-height: 48px;
   text-align: center;
   color: #1f1f1f;
-
   padding-top: 42px;
 }
 
@@ -54,11 +51,9 @@
 .sight_types_content {
   max-width: 1366px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding-bottom: 82px;
 }
 
@@ -66,13 +61,11 @@
   font-family: var(--font-family-main);
   font-size: 32px;
   color: var(--color-white);
-
   margin-top: 45px;
 }
 
 .types_container {
   margin-top: 60px;
-
   display: grid;
   align-items: center;
   grid-template-columns: repeat(4, 1fr);
@@ -87,7 +80,6 @@
 .about_us_content {
   margin: 0 auto;
   width: 100%;
-
   display: flex;
   justify-content: center;
   background-color: #b4b4b4;
@@ -96,7 +88,6 @@
 .left_img {
   min-width: 469px;
   min-height: 440px;
-
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--left-img);
   background-size: cover;
   background-repeat: no-repeat;
@@ -106,7 +97,6 @@
 .right_img {
   min-width: 468px;
   min-height: 440px;
-
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), var(--right-img);
   background-size: cover;
   background-repeat: no-repeat;
@@ -115,19 +105,16 @@
 
 .text_container {
   max-width: 430px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   color: var(--color-white);
 }
 
 .text_container .title {
   font-family: var(--font-family-main);
   font-size: 28px;
-
   margin-top: 50px;
 }
 
@@ -136,9 +123,7 @@
   font-weight: var(--font-medium);
   font-size: 18px;
   line-height: 149.2%;
-
   margin: 50px 29px 29px 30px;
-
   text-align: center;
 }
 
@@ -146,4 +131,151 @@
   width: 200px;
   height: 45px;
   font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .sight_content {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .sight_content .title {
+    font-size: 24px;
+    line-height: 36px;
+    padding-top: 30px;
+  }
+
+  .sight_content Button {
+    width: 255px;
+    height: 65px;
+  }
+
+  .sights_container {
+    width: 100%;
+    height: fit-content;
+    background-color: #b4b4b4;
+  }
+
+  .big_cities_cards_container {
+    margin-top: 30px;
+    /* display: grid; */
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+
+  .little_cities_cards_container {
+    margin-top: 20px;
+    /* display: grid; */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .types_container {
+    margin-top: 40px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .sight_types_content .title {
+    font-size: 24px;
+    margin-top: 30px;
+  }
+
+  /* .types_container {
+    margin-top: 40px;
+    grid-template-columns: repeat(2, 1fr);
+  } */
+
+  .about_us_container {
+    grid-template-columns: 1fr;
+  }
+
+  .left_img,
+  .right_img {
+    min-width: 100%;
+    min-height: 300px;
+  }
+
+  .text_container .title {
+    font-size: 24px;
+    margin-top: 30px;
+  }
+
+  .text_container .main_text {
+    margin: 30px;
+  }
+
+  .button {
+    width: 240px;
+    height: 50px;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .little_cities_cards_container {
+    margin-top: 20px;
+    /* display: grid; */
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+
+  .types_container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .sight_content .title {
+    font-size: 16px;
+    line-height: 30px;
+    padding-top: 20px;
+  }
+
+  .big_cities_cards_container {
+    margin-top: 20px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .little_cities_cards_container {
+    margin-top: 15px;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .sight_types_content .title {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  /* .types_container {
+    margin-top: 30px;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  } */
+
+  .left_img,
+  .right_img {
+    min-width: 100%;
+    min-height: 200px;
+  }
+
+  .text_container .title {
+    font-size: 20px;
+  }
+
+  .text_container .main_text {
+    font-size: 16px;
+  }
+
+  /* .button {
+      width: 140px;
+      height: 35px;
+      font-size: 14px;
+    } */
 }

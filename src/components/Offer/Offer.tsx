@@ -18,7 +18,9 @@ export const Offer = () => {
           <div className={style.main_text}>Путешествуйте и делитесь своими впечатлениями</div>
         </div>
 
-        <Button onClick={() => navigate('/новаяДост')}>Добавить</Button>
+        <Button onClick={() => navigate('/новаяДост')} classnames={style.offer_button}>
+          Добавить
+        </Button>
       </div>
     </div>
   );

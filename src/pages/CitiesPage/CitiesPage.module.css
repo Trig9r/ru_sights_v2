@@ -73,7 +73,6 @@
 
 .dropdown {
   width: 230px;
-  height: 45px;
   background-color: #d9d9d9;
   color: #505050;
 
@@ -115,3 +114,88 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
+
+/* @media (max-width: 768px) {
+  .title_container .title {
+    font-size: 28px;
+  }
+
+  .title_container .navbar {
+    font-size: 18px;
+  }
+
+  .input_container {
+    margin-top: 40px;
+    margin-left: 10px;
+  }
+
+  .input {
+    width: 280px;
+    font-size: 16px;
+  }
+
+  .dropdown {
+    width: 150px;
+    margin-left: 40px;
+  }
+
+  .button_find {
+    width: 160px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 40px;
+  }
+
+  .line {
+    margin-top: 40px;
+  }
+
+  .cities_container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title_container .title {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 8px;
+  }
+
+  .title_container .navbar {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .input_container {
+    margin-top: 30px;
+    margin-left: 8px;
+  }
+
+  .input {
+    width: 200px;
+    font-size: 14px;
+  }
+
+  .dropdown {
+    width: 120px;
+    margin-left: 30px;
+  }
+
+  .button_find {
+    width: 140px;
+    height: 35px;
+    font-size: 14px;
+    margin-left: 30px;
+  }
+
+  .line {
+    margin-top: 30px;
+  }
+
+  .cities_container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+} */

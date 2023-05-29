@@ -3,7 +3,6 @@
   height: 700px;
   max-height: 700px;
   overflow: hidden;
-
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--main-img);
   background-size: cover;
   background-repeat: no-repeat;
@@ -28,7 +27,6 @@
 .text_container {
   margin-top: 245px;
   margin-left: 144px;
-
   color: var(--color-white);
   font-family: var(--font-family-side);
 }
@@ -41,7 +39,6 @@
 
 .main_text {
   max-width: 518px;
-
   font-weight: var(--font-extra-bold);
   font-size: 32px;
   line-height: 51px;
@@ -50,4 +47,75 @@
 .offer_content Button {
   margin-top: 65px;
   margin-left: 900px;
+}
+
+@media only screen and (max-width: 768px) {
+  .offer_container {
+    height: auto;
+    max-height: none;
+    padding-bottom: 30px;
+  }
+
+  .text_container {
+    margin-top: 120px;
+    margin-left: 0px;
+    text-align: center;
+  }
+
+  .main_text {
+    max-width: 100%;
+    font-size: 28px;
+    font-weight: var(--font-extra-bold);
+    line-height: 41px;
+  }
+
+  .offer_content Button {
+    margin: 30px auto 0;
+  }
+
+  .offer_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 220px;
+    height: 55px;
+
+    font-size: 21px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .text_container {
+    margin-top: 100px;
+    margin-left: 0px;
+
+    text-align: center;
+  }
+
+  .side_text {
+    font-weight: var(--font-light);
+    font-size: 16px;
+    line-height: 29px;
+    margin-bottom: 20px;
+  }
+
+  .main_text {
+    max-width: 100%;
+    font-size: 20px;
+    font-weight: var(--font-extra-bold);
+    line-height: 25px;
+    margin-bottom: 20px;
+  }
+
+  .offer_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 180px;
+    height: 45px;
+
+    font-size: 18px;
+  }
 }

@@ -6,6 +6,7 @@ export interface SightCardTypes {
   id: number;
   name: string;
   count_views: number;
+  likes: number;
   imgUrl: string;
 }
 
@@ -26,6 +27,7 @@ export const useStore = create<SightState>((set) => ({
           id: sight.id,
           name: sight.name,
           count_views: sight.count_views,
+          likes: sight.likes,
           imgUrl: sight.imgUrl,
         } as SightCardTypes,
         ...state.favoriteSights,

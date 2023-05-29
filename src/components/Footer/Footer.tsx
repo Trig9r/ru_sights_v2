@@ -8,11 +8,11 @@ export const Footer = () => {
       <div className={style.footer_container}>
         <div className={style.footer_content}>
           <ul className={style.footer_info}>
-            <li>Контакты</li>
-            <li>Политика конфиденциальности</li>
-            <li>Условия использования</li>
-            <li>Отказ от ответственности</li>
-            <li>FAQ</li>
+            <li>Контакты </li>
+            <li>Политика конфиденциальности </li>
+            <li>Условия использования </li>
+            <li>Отказ от ответственности </li>
+            <li>FAQ </li>
           </ul>
         </div>
       </div>

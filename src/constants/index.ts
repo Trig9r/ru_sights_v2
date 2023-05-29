@@ -13,4 +13,5 @@ export const CATEGORIES = [
   { id: 'count_views', name: 'По просмотрам' },
   { id: 'name', name: 'По названию' },
   { id: 'created', name: 'По дате' },
+  { id: 'likes', name: 'По лайкам' },
 ];

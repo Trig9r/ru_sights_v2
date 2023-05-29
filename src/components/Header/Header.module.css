@@ -18,6 +18,7 @@
 
 .header_logo_container {
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .header_logo {
@@ -31,14 +32,13 @@
   margin-left: 15px;
 }
 
-/* .burger {
-  cursor: pointer;
-} */
-
 .burger_button {
   width: 30px;
   height: 25px;
   position: relative;
+
+  margin-right: 20px;
+  margin-top: 10px;
 
   cursor: pointer;
 }
@@ -68,4 +68,62 @@
   width: 30px;
   background-color: black;
   height: 3px;
+}
+
+@media only screen and (max-width: 768px) {
+  .header_logo_container span {
+    font-size: 24px;
+  }
+
+  .burger_button {
+    width: 25px;
+    height: 20px;
+  }
+
+  .burger_button::before,
+  .burger_button span,
+  .burger_button::after {
+    width: 25px;
+  }
+
+  .burger_button::before {
+    top: 0;
+  }
+
+  .burger_button span {
+    top: 8px;
+  }
+
+  .burger_button::after {
+    bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .header_logo_container span {
+    font-size: 20px;
+  }
+
+  .burger_button {
+    width: 20px;
+    height: 15px;
+  }
+
+  .burger_button::before,
+  .burger_button span,
+  .burger_button::after {
+    width: 20px;
+  }
+
+  .burger_button::before {
+    top: 0;
+  }
+
+  .burger_button span {
+    top: 6px;
+  }
+
+  .burger_button::after {
+    bottom: 0;
+  }
 }

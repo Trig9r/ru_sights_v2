@@ -10,6 +10,7 @@ import type { SightTypes } from '@/@types';
 import likeIcon from './img/likeIcon.svg';
 import likeIconFill from './img/likeIconFill.svg';
 import eyeIcon from './img/eyeIcon.svg';
+import likesIcon from './img/likes.svg';
 
 import style from './SightCard.module.css';
 
@@ -18,11 +19,19 @@ interface SightCardProps {
   imgUrl: string;
   sightName: string;
   views: number;
+  likes: number;
   liked?: boolean;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export const SightCard: React.FC<SightCardProps> = ({ id, imgUrl, sightName, views, onClick }) => {
+export const SightCard: React.FC<SightCardProps> = ({
+  id,
+  imgUrl,
+  sightName,
+  views,
+  likes,
+  onClick,
+}) => {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   const liked = getLocalStorage('store').some((sight: SightTypes) => sight.id === id);
@@ -34,6 +43,7 @@ export const SightCard: React.FC<SightCardProps> = ({ id, imgUrl, sightName, vie
     id,
     name: sightName,
     count_views: views,
+    likes,
     imgUrl: imgUrl,
   };
 
@@ -61,6 +71,10 @@ export const SightCard: React.FC<SightCardProps> = ({ id, imgUrl, sightName, vie
           <div className={style.views_container}>
             <img src={eyeIcon} alt="eyeIcon" />
             <span>{views}</span>
+          </div>
+          <div className={style.likes_container}>
+            <img src={likesIcon} alt="likesIcon" />
+            <span>{likes}</span>
           </div>
           {isLiked ? (
             <img

@@ -84,3 +84,39 @@
 .city_info .count_views {
   margin-left: 10px;
 }
+
+@media only screen and (max-width: 480px) {
+  .card_container {
+    width: 270px;
+    height: 408px;
+  }
+
+  .img_container {
+    width: 270px;
+    height: 208px;
+  }
+
+  .city_name {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    white-space: nowrap;
+    font-family: var(--font-family-side);
+    font-weight: var(--font-semi-bold);
+    font-size: 24px;
+    color: var(--color-white);
+    z-index: 3;
+  }
+
+  .city_info {
+    display: flex;
+    align-items: center;
+
+    font-family: var(--font-family-side);
+    font-weight: var(--font-regular);
+    font-size: 16px;
+    color: #131313;
+  }
+}

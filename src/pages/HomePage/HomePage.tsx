@@ -42,7 +42,7 @@ interface CityArray {
 export const HomePage = () => {
   const navigate = useNavigate();
 
-  const { data, isLoading, isError } = useCities<CityArray>();
+  const { data, isLoading, isError } = useCities<CityArray>('count_views', false);
 
   if (isError || !data) return <div>loading...</div>;
 

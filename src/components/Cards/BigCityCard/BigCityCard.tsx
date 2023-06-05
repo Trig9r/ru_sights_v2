@@ -24,7 +24,7 @@ export const BigCityCard: React.FC<BigCityCardProps> = ({
   countPeople,
   countViews,
 }) => {
-  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.4, triggerOnce: true });
 
   return (
     <div ref={ref} className={style.card_container}>

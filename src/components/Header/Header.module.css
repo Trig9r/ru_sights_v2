@@ -38,9 +38,19 @@
   position: relative;
 
   margin-right: 20px;
-  margin-top: 10px;
+  margin-top: 11px;
 
   cursor: pointer;
+
+  transition: all;
+}
+
+.burger_button:hover {
+  transform: scale(1.01);
+}
+
+.burger_button:active {
+  transform: scale(0.99);
 }
 
 .burger_button::before {

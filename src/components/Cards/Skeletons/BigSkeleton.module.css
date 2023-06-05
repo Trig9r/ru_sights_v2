@@ -1,0 +1,6 @@
+@media only screen and (max-width: 480px) {
+  .skeleton {
+    width: 270px;
+    height: 408px;
+  }
+}

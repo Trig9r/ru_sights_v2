@@ -10,28 +10,25 @@
 
 .title_container {
   width: 100%;
+  height: 200px;
   background-color: var(--page-light-grey-color);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-
   font-family: var(--font-family-main);
 }
 
 .title_container .title {
   margin-top: 40px;
   margin-bottom: 12px;
-
   font-size: 36px;
   color: var(--color-white);
 }
 
 .title_container .navbar {
   margin-bottom: 14px;
-
   font-size: 20px;
   color: #363636;
 }
@@ -49,11 +46,9 @@
   width: 520px;
   height: 40px;
   margin-left: 10px;
-
   font-family: var(--font-family-side);
   color: var(--color-white);
   font-size: 18px;
-
   border: none;
   background-color: var(--page-dark-grey-color);
   border-bottom: 2px solid #d9d9d9;
@@ -67,7 +62,7 @@
 
 .search_container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: baseline;
 }
 
@@ -75,9 +70,6 @@
   width: 230px;
   background-color: #d9d9d9;
   color: #505050;
-
-  margin-left: 60px;
-
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -85,10 +77,8 @@
   width: 200px;
   height: 50px;
   border-radius: 15px;
-
   font-size: 20px;
   padding-top: 2px;
-
   margin-left: 55px;
 }
 
@@ -102,20 +92,17 @@
 .cities_container {
   min-height: calc(50vh - 106px);
   width: fit-content;
-
   margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 70px;
-
   display: grid;
   align-items: center;
   justify-content: center;
-
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .title_container .title {
     font-size: 28px;
   }
@@ -130,13 +117,18 @@
   }
 
   .input {
-    width: 280px;
+    width: 340px;
     font-size: 16px;
   }
 
   .dropdown {
-    width: 150px;
-    margin-left: 40px;
+    width: 180px;
+    background-color: #d9d9d9;
+    color: #505050;
+
+    margin-left: 60px;
+
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
   }
 
   .button_find {
@@ -157,6 +149,14 @@
 }
 
 @media (max-width: 480px) {
+  .search_container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 20px;
+  }
+
   .title_container .title {
     font-size: 24px;
     margin-top: 30px;
@@ -174,12 +174,13 @@
   }
 
   .input {
-    width: 200px;
+    width: 250px;
     font-size: 14px;
   }
 
   .dropdown {
-    width: 120px;
+    width: 220px;
+
     margin-left: 30px;
   }
 
@@ -198,4 +199,4 @@
     grid-template-columns: 1fr;
     gap: 15px;
   }
-} */
+}

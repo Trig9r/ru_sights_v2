@@ -1,35 +1,3 @@
-/* .input_container {
-  width: 375px;
-  height: 45px;
-
-  font-family: var(--font-family-main);
-}
-
-::-webkit-input-placeholder {
-  padding-top: 8px;
-  font-size: 18px;
-  font-weight: var(--font-regular);
-  color: #cfcfcf;
-}
-
-.input {
-  width: 100%;
-  height: 100%;
-
-  border: 3px solid #d9d9d9;
-  border-radius: 15px;
-  background-color: transparent;
-
-  padding-left: 15px;
-}
-
-.input:active,
-.input:focus {
-  outline: none;
-  caret-color: #0a0a0a;
-  padding-left: 27px;
-} */
-
 .input_container {
   width: 375px;
   height: 48px;
@@ -41,18 +9,12 @@
   cursor: text;
 
   font-family: var(--font-family-side);
-
-  /* transition: all var(--transition); */
 }
 
 .input_container[aria-disabled='true'] {
   background-color: red;
   cursor: default;
 }
-
-/* .input_container:hover {
-  background-color: #a1a1a1;
-} */
 
 .input_label {
   position: absolute;
@@ -104,4 +66,35 @@
   color: rgb(169, 13, 13);
   padding-top: 5px;
   padding-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .input_container {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .input_label {
+    font-size: 12px;
+  }
+
+  .input:focus ~ .input_label {
+    font-size: 10px;
+  }
+
+  .input:not([value='']) ~ .input_label {
+    font-size: 10px;
+  }
+
+  .input {
+    font-size: 14px;
+  }
+
+  .helper_text {
+    font-size: 10px;
+    line-height: 12px;
+    padding-top: 3px;
+    padding-left: 8px;
+  }
 }

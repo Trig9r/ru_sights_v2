@@ -58,7 +58,7 @@ export const AddSightPage = () => {
 
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
-  const { data, isLoading, isError } = useCities<CityArray>();
+  const { data, isLoading, isError } = useCities<CityArray>('name', true);
 
   // получение города пользователя через геолокацию
   const userCity = getUserCityName();
@@ -139,7 +139,7 @@ export const AddSightPage = () => {
           setIsLoadingPost(true);
 
           const response = await axios.post(
-            'http://localhost/sight_api/sights/create.php',
+            'http://srv191964.hoster-test.ru/sight_api/sights/create.php',
             formData,
             {
               headers: {
@@ -148,9 +148,9 @@ export const AddSightPage = () => {
             },
           );
 
-          // console.log('Files uploaded successfully: ', response.data);
+          console.log('Files uploaded successfully: ', response.data);
           setIsLoadingPost(false);
-          // setIsActiveModal(true);
+          setIsActiveModal(true);
         } catch (error) {
           const { response } = error as AxiosError;
           const { data } = response as AxiosResponse;
@@ -201,6 +201,7 @@ export const AddSightPage = () => {
               selectedValue={selectedCity.name}
               setSelectedElement={({ id, name }) => setSelectedCity({ id: id, name: name })}
               isSearchable
+              classnames={style.dropdown}
             />
           </div>
 
@@ -279,8 +280,7 @@ export const AddSightPage = () => {
               type="submit"
               classnames={style.button_submit}
               primary
-              isLoading={isLoadingPost}
-              onClick={() => setIsActiveModal(true)}>
+              isLoading={isLoadingPost}>
               Добавить
             </Button>
             <span style={{ color: 'red', marginTop: '20px' }}>{backendErrors}</span>
@@ -290,13 +290,13 @@ export const AddSightPage = () => {
 
       <Footer />
 
-      {/* <Modal
+      <Modal
         title="Переход"
         active={isActiveModal}
         onClose={handleCloseModal}
         onSubmit={() => navigate(`/достопримечательность/${sightValue.name}`)}>
         <div>Перейти на добавленную достопримечательность?</div>
-      </Modal> */}
+      </Modal>
     </div>
   );
 };

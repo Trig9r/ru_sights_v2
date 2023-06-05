@@ -5,7 +5,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import viewsIcon from '@/styles/static/icons/views.svg';
 import waletIcon from '@/styles/static/icons/walet.svg';
 import placeIcon from '@/styles/static/icons/place.svg';
-import likesIcon from '@/styles/static/icons/likes.svg';
+import favouriteIcon from '@/styles/static/icons/favourite.svg';
 import calendarIcon from '@/styles/static/icons/calendar.svg';
 import saveIcon from '@/styles/static/icons/save.svg';
 import plusIcon from '@/styles/static/icons/plus.svg';
@@ -127,7 +127,7 @@ export const UpdateSightPage = () => {
           setIsLoadingPost(true);
 
           const response = await axios.post(
-            'http://localhost/sight_api/sights/update.php',
+            'http://srv191964.hoster-test.ru/sight_api/sights/update.php',
             formData,
             {
               headers: {
@@ -192,7 +192,7 @@ export const UpdateSightPage = () => {
             </div>
 
             <div className={style.info_container} title="Кол-во в избранном">
-              <img src={likesIcon} alt="likesIcon" />
+              <img src={favouriteIcon} alt="favouriteIcon" />
               <span className={style.count_likes}>{sight.count_favorite}</span>
             </div>
 

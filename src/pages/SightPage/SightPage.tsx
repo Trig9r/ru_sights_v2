@@ -62,16 +62,22 @@ export const SightPage = () => {
     if (isLiked) {
       setLikes(likes - 1);
       setLocalStorage('sightsLikes', [...likesIds.filter((id: number) => id !== sight.id)]);
-      await axios.get(`http://localhost/sight_api/sights/remove_like.php?id=${sight.id}`);
+      await axios.get(
+        `http://srv191964.hoster-test.ru/sight_api/sights/remove_like.php?id=${sight.id}`,
+      );
     } else {
       setLikes(likes + 1);
       setLocalStorage('sightsLikes', [...likesIds, sight.id]);
-      await axios.get(`http://localhost/sight_api/sights/add_like.php?id=${sight.id}`);
+      await axios.get(
+        `http://srv191964.hoster-test.ru/sight_api/sights/add_like.php?id=${sight.id}`,
+      );
 
       if (isDisliked) {
         setDislikes(dislikes - 1);
         setLocalStorage('sightsDislikes', [dislikesIds.filter((id: number) => id !== sight.id)]);
-        await axios.get(`http://localhost/sight_api/sights/remove_dislike.php?id=${sight.id}`);
+        await axios.get(
+          `http://srv191964.hoster-test.ru/sight_api/sights/remove_dislike.php?id=${sight.id}`,
+        );
       }
     }
 
@@ -83,16 +89,22 @@ export const SightPage = () => {
     if (isDisliked) {
       setDislikes(dislikes - 1);
       setLocalStorage('sightsDislikes', [...dislikesIds.filter((id: number) => id !== sight.id)]);
-      await axios.get(`http://localhost/sight_api/sights/remove_dislike.php?id=${sight.id}`);
+      await axios.get(
+        `http://srv191964.hoster-test.ru/sight_api/sights/remove_dislike.php?id=${sight.id}`,
+      );
     } else {
       setDislikes(dislikes + 1);
       setLocalStorage('sightsDislikes', [...dislikesIds, sight.id]);
-      await axios.get(`http://localhost/sight_api/sights/add_dislike.php?id=${sight.id}`);
+      await axios.get(
+        `http://srv191964.hoster-test.ru/sight_api/sights/add_dislike.php?id=${sight.id}`,
+      );
 
       if (isLiked) {
         setLikes(likes - 1);
         setLocalStorage('sightsLikes', [likesIds.filter((id: number) => id !== sight.id)]);
-        await axios.get(`http://localhost/sight_api/sights/remove_like.php?id=${sight.id}`);
+        await axios.get(
+          `http://srv191964.hoster-test.ru/sight_api/sights/remove_like.php?id=${sight.id}`,
+        );
       }
     }
 
@@ -118,7 +130,7 @@ export const SightPage = () => {
                 .map(() => <div className={style.img_container}>{<ImgSkeleton />}</div>)
             : images.map((img: ImgTypes) => (
                 <div className={style.img_container} key={img.id}>
-                  <img src={`/upload/${img.imgUrl}`} alt="img" />
+                  <img src={`http://srv191964.hoster-test.ru/uploads/${img.imgUrl}`} alt="img" />
                 </div>
               ))}
         </div>

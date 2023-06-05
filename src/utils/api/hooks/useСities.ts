@@ -6,13 +6,12 @@ export const useCities = <T>(category: string, sortByASC: boolean) => {
     queryKey: [`cities&categorySort=${category}&sort=${sortByASC ? 'ASC' : 'DESC'}`],
     queryFn: async () => {
       const { data } = await axios.get<T>(
-        `http://localhost/sight_api/cities/read.php?order=${category}&sort=${
+        `http://srv191964.hoster-test.ru/sight_api/cities/read.php?order=${category}&sort=${
           sortByASC ? 'ASC' : 'DESC'
         }`,
       );
       return data;
     },
     refetchOnWindowFocus: false,
-    staleTime: 60000,
   });
 };

@@ -23,5 +23,13 @@ export const SearchInput: React.FC<InputProps> = ({ value, classes, setSearchVal
     updateSearchValue(e.target.value);
   };
 
-  return <input type="text" value={value} onChange={onSearch} className={classes} />;
+  return (
+    <input
+      placeholder="Поиск"
+      type="text"
+      value={value}
+      onChange={onSearch}
+      className={`${classes} ${style.input}`}
+    />
+  );
 };

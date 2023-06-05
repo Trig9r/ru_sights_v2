@@ -36,11 +36,11 @@ export const CitiesPage = () => {
     isError,
   } = useCities<CityArray>(selectedCategory.id, sortByASC);
 
-  if (isError || !citiesData) return <div>loading...</div>;
+  if (isError) return <div>loading...</div>;
 
-  const emptyCities = citiesData.cities.length === 0;
+  const emptyCities = citiesData?.cities.length === 0;
 
-  const filteredCities = citiesData.cities.filter(({ name }) =>
+  const filteredCities = citiesData?.cities.filter(({ name }) =>
     name.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
@@ -77,11 +77,11 @@ export const CitiesPage = () => {
             />
           </div>
 
-          <div className={style.button_container}>
+          {/* <div className={style.button_container}>
             <Button primary classnames={style.button_find}>
               Найти
             </Button>
-          </div>
+          </div> */}
         </div>
 
         <div className={style.line} />

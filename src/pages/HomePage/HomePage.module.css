@@ -236,6 +236,13 @@
     padding-top: 20px;
   }
 
+  .sight_content Button {
+    width: 230px;
+    height: 45px;
+
+    font-size: 18px;
+  }
+
   .big_cities_cards_container {
     margin-top: 20px;
     grid-template-columns: 1fr;

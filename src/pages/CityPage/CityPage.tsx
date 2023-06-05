@@ -86,26 +86,28 @@ export const CityPage = () => {
             />
           </div>
 
-          <div className={style.dropdown_container}>
-            <Dropdown
-              placeholder="Сортировка"
-              selectedValue={selectedCategory.name}
-              elements={CATEGORIES}
-              classnames={style.dropdown}
-              setSelectedElement={({ id, name }) => setSelectedCategory({ id: id, name: name })}
-              setSort={() => setSortByASC(!sortByASC)}
-              isSortable
-            />
-          </div>
+          <div className={style.dropdowns_container}>
+            <div className={style.dropdown_container}>
+              <Dropdown
+                placeholder="Сортировка"
+                selectedValue={selectedCategory.name}
+                elements={CATEGORIES}
+                classnames={style.dropdown}
+                setSelectedElement={({ id, name }) => setSelectedCategory({ id: id, name: name })}
+                setSort={() => setSortByASC(!sortByASC)}
+                isSortable
+              />
+            </div>
 
-          <div className={style.dropdown_container}>
-            <Dropdown
-              placeholder="Тип дост-ти"
-              selectedValue={selectedType.name}
-              elements={[{ id: '', name: 'Все' }, ...TYPES]}
-              classnames={style.dropdown}
-              setSelectedElement={({ id, name }) => setSelectedType({ id: id, name: name })}
-            />
+            <div className={style.dropdown_container}>
+              <Dropdown
+                placeholder="Тип дост-ти"
+                selectedValue={selectedType.name}
+                elements={[{ id: '', name: 'Все' }, ...TYPES]}
+                classnames={style.dropdown}
+                setSelectedElement={({ id, name }) => setSelectedType({ id: id, name: name })}
+              />
+            </div>
           </div>
         </div>
 

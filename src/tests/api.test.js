@@ -5,7 +5,7 @@ import axios from 'axios';
 test('Проверка соединения с API', async () => {
   try {
     // Отправляем GET-запрос к вашему API
-    const response = await axios.get('http://srv191964.hoster-test.ru/sight_api/');
+    const response = await axios.get('http://localhost/sight_api/');
 
     // Проверяем статусный код ответа
     expect(response.status).toBe(200);

@@ -33,7 +33,7 @@ describe('Добавление новой достопримечательнос
     });
 
     // Проверка, что запрос к серверу был выполнен с правильными данными
-    expect(axios.post).toHaveBeenCalledWith('http://srv191964.hoster-test.ru/sight_api/', {
+    expect(axios.post).toHaveBeenCalledWith('http://localhost/sight_api/', {
       name: 'Новая достопримечательность',
       description: 'Описание новой достопримечательности',
       address: 'Москва, Россия',

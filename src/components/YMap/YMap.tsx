@@ -3,18 +3,22 @@ import { YMaps, Map, Placemark, SearchControl, TypeSelector } from '@pbe/react-y
 
 import style from './YMap.module.css';
 
-type Placemark = {
-  X: null | number;
-  Y: null | number;
-};
+interface PlacemarkData {
+  X: number;
+  Y: number;
+}
+
+interface GeoObject {
+  GeoObject: any;
+}
 
 interface YMapProps {
   width: string;
   height: string;
   pointX: number;
   pointY: number;
-  placemark?: Placemark;
-  setPlacemark?: React.Dispatch<React.SetStateAction<Placemark>>;
+  placemark?: PlacemarkData;
+  setPlacemark?: React.Dispatch<React.SetStateAction<PlacemarkData>>;
   address?: string;
   setAddress?: React.Dispatch<React.SetStateAction<string>>;
   zoom: number;
@@ -35,14 +39,12 @@ export const YMap: React.FC<YMapProps> = ({
   zoom,
   isTouchable = false,
 }) => {
-  const [points, setPoints] = React.useState({ X: pointX, Y: pointY });
-
-  const ref = React.useRef();
-  const ref2 = React.useRef();
-  const ymaps = React.useRef(null);
-
+  const [points, setPoints] = React.useState<PlacemarkData>({ X: pointX, Y: pointY });
+  const ref = React.useRef<any>();
+  const ref2 = React.useRef<any>();
+  const ymaps = React.useRef<any>(null);
   const [value, setValue] = React.useState('');
-  const [options, setOptions] = React.useState([]);
+  const [options, setOptions] = React.useState<GeoObject[]>([]);
 
   React.useEffect(() => {
     setPoints({ X: pointX, Y: pointY });
@@ -55,7 +57,9 @@ export const YMap: React.FC<YMapProps> = ({
           );
           const data = await res.json();
           const collection = data.response.GeoObjectCollection.featureMember.map(
-            (item) => item.GeoObject,
+            (item: { GeoObject: any }) => {
+              item.GeoObject;
+            },
           );
           setOptions(() => collection);
         }
@@ -70,7 +74,7 @@ export const YMap: React.FC<YMapProps> = ({
     setPlacemark!({ X: coords[0], Y: coords[1] });
     setPoints({ X: coords[1], Y: coords[0] });
 
-    ymaps.current.geocode(coords).then((res) => {
+    ymaps.current?.geocode(coords).then((res: { geoObjects: { get: (arg0: number) => any } }) => {
       const firstGeoObject = res.geoObjects.get(0);
       const newAddress = [
         firstGeoObject.getLocalities().length
@@ -81,7 +85,7 @@ export const YMap: React.FC<YMapProps> = ({
       ]
         .filter(Boolean)
         .join(', ');
-      ref.current.getMap().hint.open(coords, newAddress);
+      ref.current?.getMap().hint.open(coords, newAddress);
       setAddress!(newAddress);
       setValue(() => newAddress);
 
@@ -117,7 +121,7 @@ export const YMap: React.FC<YMapProps> = ({
           onLoad={(e) => {
             ymaps.current = e;
 
-            e.geocode([points.Y, points.X]).then((res) => {
+            e.geocode([points.Y, points.X]).then((res: any) => {
               const firstGeoObject = res.geoObjects.get(0);
               const newAddress = [
                 firstGeoObject.getLocalities().length
@@ -135,11 +139,12 @@ export const YMap: React.FC<YMapProps> = ({
           }}
           onClick={isTouchable ? handleClickMap : ''}>
           <SearchControl options={{ float: 'right' }} />
-          <TypeSelector options={{ float: 'right' }} />
+          <TypeSelector />
           <Placemark
             instanceRef={ref}
-            onDragEnd={(event) => {
-              ymaps.current.geocode(coords).then((res) => {
+            onDragEnd={(e: any) => {
+              const coords = e.get('target').geometry.getCoordinates();
+              ymaps.current?.geocode(coords).then((res: any) => {
                 const firstGeoObject = res.geoObjects.get(0);
                 const newAddress = [
                   firstGeoObject.getLocalities().length
@@ -150,7 +155,7 @@ export const YMap: React.FC<YMapProps> = ({
                 ]
                   .filter(Boolean)
                   .join(', ');
-                ref.current.getMap().hint.open(coords, newAddress);
+                ref.current?.getMap().hint.open(coords, newAddress);
                 setAddress!(newAddress);
                 setValue(() => newAddress);
               });

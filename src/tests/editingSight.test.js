@@ -5,15 +5,13 @@ describe('Редактирование достопримечательност�
 
   beforeAll(async () => {
     // Получение идентификатора существующей достопримечательности для редактирования
-    const existingSight = await axios.get('http://srv191964.hoster-test.ru/sight_api/sights');
+    const existingSight = await axios.get('http://localhost/sight_api/sights');
     sightId = existingSight.data[0].id;
   });
 
   it('можно отредактировать и сохранить изменения', async () => {
     // Загрузка текущей информации о достопримечательности
-    const currentSight = await axios.get(
-      `http://srv191964.hoster-test.ru/sight_api/sights/${sightId}`,
-    );
+    const currentSight = await axios.get(`http://localhost/sight_api/sights/${sightId}`);
 
     // Внесение изменений в данные достопримечательности
     const updatedSightData = {
@@ -24,7 +22,7 @@ describe('Редактирование достопримечательност�
 
     // Отправка запроса на обновление данных достопримечательности
     const response = await axios.put(
-      `http://srv191964.hoster-test.ru/sight_api/sights/${sightId}`,
+      `http://localhost/sight_api/sights/${sightId}`,
       updatedSightData,
     );
 
@@ -32,9 +30,7 @@ describe('Редактирование достопримечательност�
     expect(response.status).toBe(200);
 
     // Загрузка обновленной информации о достопримечательности
-    const updatedSight = await axios.get(
-      `http://srv191964.hoster-test.ru/sight_api/sights/${sightId}`,
-    );
+    const updatedSight = await axios.get(`http://localhost/sight_api/sights/${sightId}`);
 
     // Проверка, что данные достопримечательности были успешно изменены
     expect(updatedSight.data.name).toBe(updatedSightData.name);

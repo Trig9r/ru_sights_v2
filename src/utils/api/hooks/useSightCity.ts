@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export const useSightCity = <T>(
   city: string,
-  type: string,
-  category: string,
+  type: string | null | number,
+  category: string | null | number,
   sortByASC: boolean,
 ) => {
   return useQuery({

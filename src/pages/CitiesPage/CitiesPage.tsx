@@ -26,7 +26,7 @@ export const CitiesPage = () => {
   const [value, setValue] = React.useState('');
   const [sortByASC, setSortByASC] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = React.useState<{
-    id: string;
+    id: string | null | number;
     name: null | string;
   }>({ id: 'count_views', name: null });
 
@@ -71,7 +71,7 @@ export const CitiesPage = () => {
               selectedValue={selectedCategory.name}
               elements={CATEGORIES}
               classnames={style.dropdown}
-              setSelectedElement={({ id, name }) => setSelectedCategory({ id: id, name: name })}
+              setSelectedElement={(id, name) => setSelectedCategory({ id, name })}
               setSort={() => setSortByASC(!sortByASC)}
               isSortable
             />

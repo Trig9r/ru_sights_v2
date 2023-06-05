@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export const useCities = <T>(category: string, sortByASC: boolean) => {
+export const useCities = <T>(category: string | null | number, sortByASC: boolean) => {
   return useQuery({
     queryKey: [`cities&categorySort=${category}&sort=${sortByASC ? 'ASC' : 'DESC'}`],
     queryFn: async () => {

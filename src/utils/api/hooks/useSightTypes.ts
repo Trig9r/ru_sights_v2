@@ -1,7 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export const useSightTypes = <T>(type: string, category: string, sortByASC: boolean) => {
+export const useSightTypes = <T>(
+  type: string,
+  category: string | null | number,
+  sortByASC: boolean,
+) => {
   return useQuery({
     queryKey: [`sightType=${type}&sortCategory=${category}&sort=${sortByASC ? 'ASC' : 'DESC'}`],
     queryFn: async () => {

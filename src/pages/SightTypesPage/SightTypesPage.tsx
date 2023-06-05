@@ -23,7 +23,7 @@ export const SightTypesPage = () => {
 
   const [searchValue, setSearchValue] = React.useState('');
   const [selectedCategory, setSelectedCategory] = React.useState<{
-    id: string;
+    id: string | null | number;
     name: null | string;
   }>({ id: 'count_views', name: null });
   const [sortByASC, setSortByASC] = React.useState(false);
@@ -66,7 +66,7 @@ export const SightTypesPage = () => {
               selectedValue={selectedCategory.name}
               elements={CATEGORIES}
               classnames={style.dropdown}
-              setSelectedElement={({ id, name }) => setSelectedCategory({ id: id, name: name })}
+              setSelectedElement={(id, name) => setSelectedCategory({ id, name })}
               setSort={() => setSortByASC(!sortByASC)}
               isSortable
             />

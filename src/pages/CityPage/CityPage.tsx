@@ -30,11 +30,11 @@ export const CityPage = () => {
   const [searchValue, setSearchValue] = React.useState('');
   const [value, setValue] = React.useState('');
   const [selectedType, setSelectedType] = React.useState<{
-    id: string;
+    id: string | null | number;
     name: null | string;
   }>({ id: '', name: null });
   const [selectedCategory, setSelectedCategory] = React.useState<{
-    id: string;
+    id: string | null | number;
     name: null | string;
   }>({ id: 'count_views', name: null });
   const [sortByASC, setSortByASC] = React.useState(false);
@@ -93,7 +93,7 @@ export const CityPage = () => {
                 selectedValue={selectedCategory.name}
                 elements={CATEGORIES}
                 classnames={style.dropdown}
-                setSelectedElement={({ id, name }) => setSelectedCategory({ id: id, name: name })}
+                setSelectedElement={(id, name) => setSelectedCategory({ id, name })}
                 setSort={() => setSortByASC(!sortByASC)}
                 isSortable
               />
@@ -105,7 +105,7 @@ export const CityPage = () => {
                 selectedValue={selectedType.name}
                 elements={[{ id: '', name: 'Все' }, ...TYPES]}
                 classnames={style.dropdown}
-                setSelectedElement={({ id, name }) => setSelectedType({ id: id, name: name })}
+                setSelectedElement={(id, name) => setSelectedType({ id, name })}
               />
             </div>
           </div>

@@ -170,6 +170,9 @@ export const AddSightPage = () => {
     setIsActiveModal(false);
   };
 
+  console.log(selectedType);
+  console.log(selectedCity);
+
   return (
     <div className={style.container}>
       <div className={style.title_container}>

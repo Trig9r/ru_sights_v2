@@ -51,7 +51,9 @@ export const SightCard: React.FC<SightCardProps> = ({
     setIsLiked(true);
     addSight(sigth);
     event.stopPropagation();
-    await axios.get(`http://srv191964.hoster-test.ru/sight_api/sights/add_favorite.php?id=${id}`);
+    await axios.get(
+      `https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/sights/add_favorite.php?id=${id}`,
+    );
   };
 
   const removeFavorite = async (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
@@ -59,7 +61,7 @@ export const SightCard: React.FC<SightCardProps> = ({
     removeSight(id);
     event.stopPropagation();
     await axios.get(
-      `http://srv191964.hoster-test.ru/sight_api/sights/remove_favorite.php?id=${id}`,
+      `https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/sights/remove_favorite.php?id=${id}`,
     );
   };
 
@@ -68,7 +70,7 @@ export const SightCard: React.FC<SightCardProps> = ({
       {inView ? (
         <div className={style.img_container}>
           <img
-            src={`http://srv191964.hoster-test.ru/uploads/${imgUrl}`}
+            src={`https://https-requests-script.smirnovkiryusha12.workers.dev/uploads/${imgUrl}`}
             alt={sightName}
             className={style.sight_img}
           />

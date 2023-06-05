@@ -5,14 +5,16 @@ describe('Редактирование достопримечательност�
 
   beforeAll(async () => {
     // Получение идентификатора существующей достопримечательности для редактирования
-    const existingSight = await axios.get('http://srv191964.hoster-test.ru/sight_api/sights');
+    const existingSight = await axios.get(
+      'https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/sights',
+    );
     sightId = existingSight.data[0].id;
   });
 
   it('можно отредактировать и сохранить изменения', async () => {
     // Загрузка текущей информации о достопримечательности
     const currentSight = await axios.get(
-      `http://srv191964.hoster-test.ru/sight_api/sights/${sightId}`,
+      `https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/sights/${sightId}`,
     );
 
     // Внесение изменений в данные достопримечательности
@@ -24,7 +26,7 @@ describe('Редактирование достопримечательност�
 
     // Отправка запроса на обновление данных достопримечательности
     const response = await axios.put(
-      `http://srv191964.hoster-test.ru/sight_api/sights/${sightId}`,
+      `https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/sights/${sightId}`,
       updatedSightData,
     );
 
@@ -33,7 +35,7 @@ describe('Редактирование достопримечательност�
 
     // Загрузка обновленной информации о достопримечательности
     const updatedSight = await axios.get(
-      `http://srv191964.hoster-test.ru/sight_api/sights/${sightId}`,
+      `https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/sights/${sightId}`,
     );
 
     // Проверка, что данные достопримечательности были успешно изменены

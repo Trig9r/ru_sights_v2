@@ -33,11 +33,14 @@ describe('Добавление новой достопримечательнос
     });
 
     // Проверка, что запрос к серверу был выполнен с правильными данными
-    expect(axios.post).toHaveBeenCalledWith('http://srv191964.hoster-test.ru/sight_api/', {
-      name: 'Новая достопримечательность',
-      description: 'Описание новой достопримечательности',
-      address: 'Москва, Россия',
-    });
+    expect(axios.post).toHaveBeenCalledWith(
+      'https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/',
+      {
+        name: 'Новая достопримечательность',
+        description: 'Описание новой достопримечательности',
+        address: 'Москва, Россия',
+      },
+    );
 
     // Проверка, что сообщение об успешном сохранении отображается
     const successMessage = await screen.findByText('Достопримечательность успешно добавлена');

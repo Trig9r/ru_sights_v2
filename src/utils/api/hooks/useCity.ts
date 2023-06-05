@@ -6,7 +6,7 @@ export const useCity = <T>(city: string) => {
     queryKey: ['city', city],
     queryFn: async () => {
       const { data } = await axios.get<T>(
-        `http://srv191964.hoster-test.ru/sight_api/cities/read_one.php?city=${city}`,
+        `https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/cities/read_one.php?city=${city}`,
       );
       return data;
     },

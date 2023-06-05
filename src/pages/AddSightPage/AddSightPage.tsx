@@ -142,7 +142,7 @@ export const AddSightPage = () => {
           setIsLoadingPost(true);
 
           const response = await axios.post(
-            'http://srv191964.hoster-test.ru/sight_api/sights/create.php',
+            'https://https-requests-script.smirnovkiryusha12.workers.dev/sight_api/sights/create.php',
             formData,
             {
               headers: {

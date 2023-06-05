@@ -4,8 +4,8 @@ import { YMaps, Map, Placemark, SearchControl, TypeSelector } from '@pbe/react-y
 import style from './YMap.module.css';
 
 interface PlacemarkData {
-  X: number;
-  Y: number;
+  X: number | null;
+  Y: number | null;
 }
 
 interface GeoObject {
@@ -114,14 +114,14 @@ export const YMap: React.FC<YMapProps> = ({
           width={width}
           height={height}
           state={{
-            center: [points.Y, points.X],
+            center: [points.Y ?? 0, points.X ?? 0],
             zoom: zoom,
             controls: ['zoomControl'],
           }}
           onLoad={(e) => {
             ymaps.current = e;
 
-            e.geocode([points.Y, points.X]).then((res: any) => {
+            e.geocode([points.Y ?? 0, points.X ?? 0]).then((res: any) => {
               const firstGeoObject = res.geoObjects.get(0);
               const newAddress = [
                 firstGeoObject.getLocalities().length

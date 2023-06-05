@@ -9,7 +9,7 @@ describe('Производительность и нагрузочное тес�
 
     // Отправка множества параллельных запросов
     for (let i = 0; i < requestCount; i++) {
-      requestPromises.push(axios.get('http://localhost/sight_api/'));
+      requestPromises.push(axios.get('http://srv191964.hoster-test.ru/sight_api/'));
     }
 
     // Ожидание выполнения всех запросов

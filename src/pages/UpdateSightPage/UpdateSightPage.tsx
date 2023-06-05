@@ -127,7 +127,7 @@ export const UpdateSightPage = () => {
           setIsLoadingPost(true);
 
           const response = await axios.post(
-            'http://localhost/sight_api/sights/update.php',
+            'http://srv191964.hoster-test.ru/sight_api/sights/update.php',
             formData,
             {
               headers: {

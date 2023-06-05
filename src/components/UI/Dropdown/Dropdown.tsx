@@ -7,7 +7,7 @@ interface DropdownProps {
   placeholder: string;
   elements: any;
   selectedValue: SelectedValueType['name'];
-  setSelectedElement: React.Dispatch<React.SetStateAction<SelectedValueType>>;
+  setSelectedElement: (id: SelectedValueType['id'], name: SelectedValueType['name']) => void;
   classnames?: any;
   isSearchable?: boolean;
   isSortable?: boolean;
@@ -15,7 +15,7 @@ interface DropdownProps {
 }
 
 type SelectedValueType = {
-  id?: null | number | string;
+  id: null | number | string;
   name: null | string;
 };
 
@@ -50,7 +50,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }, []);
 
   const onClickCity = (id: number, name: string) => {
-    setSelectedElement({ id, name });
+    setSelectedElement(id, name);
     setIsVisible(false);
   };
 

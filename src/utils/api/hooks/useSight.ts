@@ -6,7 +6,7 @@ export const useSight = <T>(name: string) => {
     queryKey: ['sight', name],
     queryFn: async () => {
       const { data } = await axios.get<T>(
-        `http://localhost/sight_api/sights/read_one.php?name=${name}`,
+        `http://srv191964.hoster-test.ru/sight_api/sights/read_one.php?name=${name}`,
       );
       return data;
     },

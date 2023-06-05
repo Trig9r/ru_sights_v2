@@ -15,7 +15,7 @@ export const useSightCity = <T>(
     ],
     queryFn: async () => {
       const { data } = await axios.get<T>(
-        `http://localhost/sight_api/sights/city.php?city=${city}&type=${type}&order=${category}&sort=${
+        `http://srv191964.hoster-test.ru/sight_api/sights/city.php?city=${city}&type=${type}&order=${category}&sort=${
           sortByASC ? 'ASC' : 'DESC'
         }`,
       );

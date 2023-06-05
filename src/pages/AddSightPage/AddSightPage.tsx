@@ -37,16 +37,19 @@ export const AddSightPage = () => {
   });
 
   const [selectedCity, setSelectedCity] = React.useState<{
-    id: null | number;
+    id: null | number | string;
     name: null | string;
   }>({ id: null, name: null });
 
   const [selectedType, setSelectedType] = React.useState<{
-    id: null | number;
+    id: null | number | string;
     name: null | string;
   }>({ id: null, name: null });
 
-  const [placemarkCoords, setPlacemarkCoords] = React.useState({ X: null, Y: null });
+  const [placemarkCoords, setPlacemarkCoords] = React.useState<{
+    X: null | number;
+    Y: null | number;
+  }>({ X: null, Y: null });
   const [sightAddress, setSightAddress] = React.useState('');
 
   const [selectedImages, setSelectedImages] = React.useState<FileList | null>(null);
@@ -139,7 +142,7 @@ export const AddSightPage = () => {
           setIsLoadingPost(true);
 
           const response = await axios.post(
-            'http://localhost/sight_api/sights/create.php',
+            'http://srv191964.hoster-test.ru/sight_api/sights/create.php',
             formData,
             {
               headers: {
@@ -199,7 +202,7 @@ export const AddSightPage = () => {
               placeholder="Город"
               elements={filteredCities}
               selectedValue={selectedCity.name}
-              setSelectedElement={({ id, name }) => setSelectedCity({ id: id, name: name })}
+              setSelectedElement={(id, name) => setSelectedCity({ id, name })}
               isSearchable
               classnames={style.dropdown}
             />
@@ -246,7 +249,7 @@ export const AddSightPage = () => {
               selectedValue={selectedType.name}
               elements={TYPES}
               classnames={style.dropdown}
-              setSelectedElement={({ id, name }) => setSelectedType({ id: id, name: name })}
+              setSelectedElement={(id, name) => setSelectedType({ id, name })}
             />
           </div>
 

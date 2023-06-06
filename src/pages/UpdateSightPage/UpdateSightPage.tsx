@@ -58,7 +58,7 @@ export const UpdateSightPage = () => {
       const previews = data.images.map((imageName) => {
         // Здесь вы можете использовать путь к папке с фотографиями и imageName
         // для создания полного URL-адреса каждой фотографии
-        return `/upload/${imageName.imgUrl}`;
+        return `https://https-requests-script.smirnovkiryusha12.workers.dev/uploads/${imageName.imgUrl}`;
       });
       setImagePreviews(previews);
     }

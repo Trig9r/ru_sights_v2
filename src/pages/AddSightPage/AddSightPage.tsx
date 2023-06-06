@@ -197,6 +197,7 @@ export const AddSightPage = () => {
                 isError: !!formErrors.name,
                 helperText: formErrors.name,
               })}
+              disabled={isLoadingPost}
             />
           </div>
 
@@ -226,6 +227,7 @@ export const AddSightPage = () => {
                 isError: !!formErrors.desc,
                 helperText: formErrors.desc,
               })}
+              disabled={isLoadingPost}
             />
           </div>
 
@@ -258,6 +260,7 @@ export const AddSightPage = () => {
 
           <div className={style.button_photo_container}>
             <Button
+              disabled={isLoadingPost}
               type="button"
               classnames={style.button_photo}
               onClick={() => inputFileRef.current?.click()}>

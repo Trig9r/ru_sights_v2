@@ -131,7 +131,7 @@ export const SightPage = () => {
             : images.map((img: ImgTypes) => (
                 <div className={style.img_container} key={img.id}>
                   <img
-                    src={`https://https-requests-script.smirnovkiryusha12.workers.dev/uploads/${img.imgUrl}`}
+                    src={`https://https-requests-script.smirnovkiryusha12.workers.dev/upload/${img.imgUrl}`}
                     alt="img"
                   />
                 </div>

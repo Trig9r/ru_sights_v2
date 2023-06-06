@@ -70,7 +70,7 @@ export const SightCard: React.FC<SightCardProps> = ({
       {inView ? (
         <div className={style.img_container}>
           <img
-            src={`https://https-requests-script.smirnovkiryusha12.workers.dev/uploads/${imgUrl}`}
+            src={`https://https-requests-script.smirnovkiryusha12.workers.dev/upload/${imgUrl}`}
             alt={sightName}
             className={style.sight_img}
           />

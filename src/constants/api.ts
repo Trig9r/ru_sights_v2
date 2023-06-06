@@ -5,7 +5,7 @@ const HTTPS = 'https://';
 const CORS_ANYWHERE = 'cors-anywhere.herokuapp.com/';
 
 // webpurify
-const API_KEY_WEBPURIFY = 'dedb6826093f230717eb26847d2aae75';
+const API_KEY_WEBPURIFY = '98edd69ac5345bc244cc82902644bd40';
 const WEBPURIFY = `api1.webpurify.com/services/rest/?api_key=${API_KEY_WEBPURIFY}&method=webpurify.live.check`;
 export const WEBPURIFY_FORMAT = 'lang=ru&format=json';
 

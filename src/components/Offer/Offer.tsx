@@ -1,5 +1,6 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import bgImage from '@/styles/static/img/bg2.png';
 
 import { Button } from '@/components/UI';
 
@@ -22,6 +23,9 @@ export const Offer = () => {
           Добавить
         </Button>
       </div>
+
+      <img src={bgImage} alt="bgImage" className={style.bgImage} />
+      <div className={style.img_tint} />
     </div>
   );
 };

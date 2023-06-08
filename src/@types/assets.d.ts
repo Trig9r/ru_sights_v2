@@ -30,6 +30,11 @@ export interface ImgTypes {
   imgUrl: string;
 }
 
+export interface MainImgTypes {
+  img_name: string;
+  location: string;
+}
+
 interface MapTypes {
   x: number;
   y: number;

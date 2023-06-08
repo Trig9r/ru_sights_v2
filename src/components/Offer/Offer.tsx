@@ -1,17 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 
-import bgImage from '@/styles/static/img/bg2.png';
-
 import { Button } from '@/components/UI';
+import { useMainImg } from '@/utils/api/hooks';
+import { getRandomInt } from '@/utils/helpers';
+
+import { MainImgTypes } from '@/@types';
 
 import style from './Offer.module.css';
 
 export const Offer = () => {
   const navigate = useNavigate();
 
+  const { data: imgObj } = useMainImg<MainImgTypes>();
+
   return (
     <div className={style.offer_container}>
-      <span className={style.bg_name}>Чарские пески, Забайкалье</span>
+      <span className={style.bg_name}>{imgObj?.location}</span>
 
       <div className={style.offer_content}>
         <div className={style.text_container}>
@@ -24,7 +28,11 @@ export const Offer = () => {
         </Button>
       </div>
 
-      <img src={bgImage} alt="bgImage" className={style.bgImage} />
+      <img
+        src={`https://https-requests-script.smirnovkiryusha12.workers.dev/main_images/${imgObj?.img_name}`}
+        alt="bgImage"
+        className={style.bgImage}
+      />
       <div className={style.img_tint} />
     </div>
   );

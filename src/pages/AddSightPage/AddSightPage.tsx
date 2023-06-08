@@ -117,7 +117,7 @@ export const AddSightPage = () => {
 
     try {
       const { data } = await axios.get(
-        `${API_WEBPURIFY}&text=${sightValue.desc}%20${sightValue.name}&${WEBPURIFY_FORMAT}`,
+        `https://cors-anywhere.herokuapp.com/${API_WEBPURIFY}&text=${sightValue.desc}%20${sightValue.name}&${WEBPURIFY_FORMAT}`,
       );
 
       const isProfanity = Number(data.rsp.found);

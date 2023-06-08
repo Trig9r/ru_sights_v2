@@ -9,7 +9,7 @@ interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, '
   isError?: boolean;
   helperText?: string;
   handleInputChange?: any;
-  classnames?: any;
+  classnames?: string;
 }
 
 export const Input: React.FC<InputProps> = ({

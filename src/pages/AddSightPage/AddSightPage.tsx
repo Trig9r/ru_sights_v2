@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Footer, Modal, YMap } from '@/components';
-import { Button, Dropdown, Input } from '@/components/UI';
+import { Button, Dropdown, Input, Textarea } from '@/components/UI';
 import { useCities } from '@/utils/api/hooks';
 import { getUserCityName, useFilteredCities } from '@/utils/helpers';
 
@@ -18,7 +18,7 @@ interface CityArray {
 }
 
 const validateLoginForm = (name: string, value: string) => {
-  if (!value) {
+  if (value === '') {
     return `${name} не может быть пустым!`;
   }
   return null;
@@ -64,10 +64,15 @@ export const AddSightPage = () => {
   const { data, isLoading, isError } = useCities<CityArray>('name', true);
 
   // получение города пользователя через геолокацию
-  const userCity = getUserCityName();
+  const userCityGeo = getUserCityName();
   React.useEffect(() => {
-    setSelectedCity({ id: null, name: userCity });
-  }, [userCity]);
+    const userCity = data?.cities.find((city) => city.name === userCityGeo);
+
+    setSelectedCity({
+      id: userCity?.id,
+      name: userCity?.name,
+    });
+  }, [userCityGeo]);
 
   if (isError || !data) return <div>loading...</div>;
 
@@ -170,7 +175,6 @@ export const AddSightPage = () => {
     setIsActiveModal(false);
   };
 
-  console.log(selectedType);
   console.log(selectedCity);
 
   return (
@@ -213,21 +217,20 @@ export const AddSightPage = () => {
           </div>
 
           <div className={style.input_container}>
-            <Input
-              value={sightValue.desc}
+            <Textarea
               label="Описание"
+              value={sightValue.desc}
               classnames={style.desc}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                 const value = e.target.value;
                 setSightValue({ ...sightValue, desc: value });
-                const errors = validateLoginForm('desc', value);
+                const errors = validateLoginForm('Описание', value);
                 setFormErrors({ ...formErrors, desc: errors });
               }}
               {...(!!formErrors.desc && {
                 isError: !!formErrors.desc,
                 helperText: formErrors.desc,
               })}
-              disabled={isLoadingPost}
             />
           </div>
 

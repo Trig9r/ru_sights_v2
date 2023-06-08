@@ -1,0 +1,40 @@
+.textarea_container {
+  min-width: 375px;
+  resize: none;
+
+  background-color: #8a8a8a;
+  border: 3px solid #d9d9d9;
+  border-radius: 15px;
+
+  color: var(--color-white);
+  font-size: 16px;
+  font-family: var(--font-family-side);
+
+  padding: 13px;
+
+  caret-color: #cfcfcf;
+}
+
+.textarea_container:active,
+.textarea_container:focus {
+  outline: none;
+}
+
+textarea::-webkit-input-placeholder {
+  font-size: 14px;
+  color: #bcbcbc;
+}
+
+textarea::-webkit-scrollbar {
+  background-color: transparent;
+  border-radius: 15px;
+}
+
+.helper_text {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 14px;
+  color: rgb(169, 13, 13);
+  padding-top: 5px;
+  padding-left: 10px;
+}

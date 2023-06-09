@@ -155,10 +155,10 @@ export const SightPage = () => {
               <span className={style.place_text}>{sight.street}</span>
             </div>
 
-            <div className={style.info_container} title="Платно">
+            {/* <div className={style.info_container} title="Платно">
               <img src={waletIcon} alt="waletIcon" />
               <span>да</span>
-            </div>
+            </div> */}
 
             <div className={style.info_container} title="Дата добавления">
               <img src={calendarIcon} alt="calendarIcon" />

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Footer, Modal, YMap } from '@/components';
 import { Button, Dropdown, Input, Textarea } from '@/components/UI';
-import { useCities } from '@/utils/api/hooks';
+import { useCities, usePurify } from '@/utils/api/hooks';
 import { getUserCityName, useFilteredCities } from '@/utils/helpers';
 
 import { TYPES } from '@/constants';
@@ -121,11 +121,9 @@ export const AddSightPage = () => {
     }
 
     try {
-      const { data } = await axios.get(
-        `https://cors-anywhere.herokuapp.com/${API_WEBPURIFY}&text=${sightValue.desc}%20${sightValue.name}&${WEBPURIFY_FORMAT}`,
-      );
+      const { data: dataPurify } = usePurify(sightValue.name, sightValue.desc);
 
-      const isProfanity = Number(data.rsp.found);
+      const isProfanity = Number(dataPurify.found);
 
       if (!!isProfanity) {
         alert('В описании или названии присутсвует ругательство');
@@ -175,7 +173,7 @@ export const AddSightPage = () => {
     setIsActiveModal(false);
   };
 
-  console.log(selectedCity);
+  // console.log(selectedCity);
 
   return (
     <div className={style.container}>

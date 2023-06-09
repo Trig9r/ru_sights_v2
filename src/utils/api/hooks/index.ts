@@ -4,3 +4,4 @@ export * from './useSight';
 export * from './useSightTypes';
 export * from './useSightCity';
 export * from './useMainImg';
+export * from './usePurufy';

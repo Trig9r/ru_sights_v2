@@ -12,7 +12,7 @@ import plusIcon from '@/styles/static/icons/plus.svg';
 
 import { Footer, YMap } from '@/components';
 import { ImgSkeleton } from '../SightPage/ImgSkeleton';
-import { useSight } from '@/utils/api/hooks';
+import { usePurify, useSight } from '@/utils/api/hooks';
 import { API_WEBPURIFY, WEBPURIFY_FORMAT } from '@/constants/api';
 import type { SightTypes, ImgTypes } from '@/@types';
 
@@ -98,11 +98,9 @@ export const UpdateSightPage = () => {
 
   const updateSightValue = async () => {
     try {
-      const { data } = await axios.get(
-        `${API_WEBPURIFY}&text=${sightValue.desc}&${WEBPURIFY_FORMAT}`,
-      );
-      console.log(data);
-      const isProfanity = Number(data.rsp.found);
+      const { data: dataPurify } = usePurify(sightValue.name, sightValue.desc);
+
+      const isProfanity = Number(dataPurify.found);
 
       if (!!isProfanity) {
         alert('В описании или названии присутсвует ругательство');

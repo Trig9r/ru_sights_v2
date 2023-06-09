@@ -13,5 +13,5 @@ export const WEBPURIFY_FORMAT = 'lang=ru&format=json';
 export const API_KEY_OPENCAGEDATA = 'a7c004a0c28846e3b4eb0cf2a6f73071';
 const OPENCAGEDATA = 'api.opencagedata.com/geocode/v1/json?q=';
 
-export const API_WEBPURIFY = HTTPS + WEBPURIFY;
+export const API_WEBPURIFY = HTTPS + CORS_ANYWHERE + HTTPS + WEBPURIFY;
 export const API_OPENCAGEDATA = HTTPS + OPENCAGEDATA;

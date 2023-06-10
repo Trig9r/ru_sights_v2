@@ -3,8 +3,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import viewsIcon from '@/styles/static/icons/views.svg';
-import waletIcon from '@/styles/static/icons/walet.svg';
 import placeIcon from '@/styles/static/icons/place.svg';
+import deleteIcon from '@/styles/static/icons/delete.svg';
 import favouriteIcon from '@/styles/static/icons/favourite.svg';
 import calendarIcon from '@/styles/static/icons/calendar.svg';
 import saveIcon from '@/styles/static/icons/save.svg';
@@ -14,7 +14,7 @@ import { Footer, YMap } from '@/components';
 import { ImgSkeleton } from '../SightPage/ImgSkeleton';
 import { usePurify, useSight } from '@/utils/api/hooks';
 import { API_WEBPURIFY, WEBPURIFY_FORMAT } from '@/constants/api';
-import type { SightTypes, ImgTypes } from '@/@types';
+import type { SightTypes, ImgTypes, PurifyTypes } from '@/@types';
 
 import style from './UpdateSightPage.module.css';
 
@@ -51,7 +51,10 @@ export const UpdateSightPage = () => {
   const [selectedImages, setSelectedImages] = React.useState<FileList | null>(null);
   const [imagePreviews, setImagePreviews] = React.useState<string[]>([]);
   const [isLoadingPost, setIsLoadingPost] = React.useState(false);
+  const [deletedImagesNames, setDeletedImagesNames] = React.useState([]);
   const [backendErrors, setBackendErrors] = React.useState('');
+
+  const { data: dataPurify } = usePurify<PurifyTypes>(sightValue.name, sightValue.desc);
 
   React.useEffect(() => {
     if (data?.images) {
@@ -98,9 +101,7 @@ export const UpdateSightPage = () => {
 
   const updateSightValue = async () => {
     try {
-      const { data: dataPurify } = usePurify(sightValue.name, sightValue.desc);
-
-      const isProfanity = Number(dataPurify.found);
+      const isProfanity = Number(dataPurify?.rsp.found);
 
       if (!!isProfanity) {
         alert('В описании или названии присутсвует ругательство');
@@ -119,6 +120,10 @@ export const UpdateSightPage = () => {
             formData.append('images[]', selectedImages![i]);
           }
         }
+
+        deletedImagesNames.forEach((imageName) => {
+          formData.append('deletedImages[]', imageName);
+        });
 
         // отправка данных с формы на rest api ресура
         try {
@@ -149,6 +154,8 @@ export const UpdateSightPage = () => {
     }
   };
 
+  console.log(deletedImagesNames);
+
   return (
     <div className={style.container}>
       <div className={style.title_container}>
@@ -168,6 +175,18 @@ export const UpdateSightPage = () => {
             : imagePreviews.map((preview, index) => (
                 <div className={style.img_container} key={index}>
                   <img key={index} src={preview} alt="preview" />
+                  <img
+                    title="Удалить"
+                    src={deleteIcon}
+                    alt="deleteIcon"
+                    className={style.delete_img}
+                    onClick={() => {
+                      setImagePreviews(imagePreviews.filter((_, id) => id !== index));
+
+                      const fileName = imagePreviews[index].split('/').pop();
+                      setDeletedImagesNames((prevImg) => [...prevImg, fileName]);
+                    }}
+                  />
                 </div>
               ))}
           <div className={style.add_img_container} onClick={() => inputFileRef.current?.click()}>
@@ -199,20 +218,23 @@ export const UpdateSightPage = () => {
               <span className={style.place_text}>{sight.street}</span>
             </div>
 
-            <div className={style.info_container} title="Платно">
-              <img src={waletIcon} alt="waletIcon" />
-              <span>да</span>
-            </div>
+            {/* <div className={style.info_container} title="Платно">
+                <img src={waletIcon} alt="waletIcon" />
+                <span>да</span>
+              </div> */}
 
-            <div className={style.info_container} title="Дата добавления">
+            <div className={style.info_container} title="Дата добавления (изменения)">
               <img src={calendarIcon} alt="calendarIcon" />
               <span>{sight.created}</span>
             </div>
           </div>
 
-          <div className={style.change_container} onClick={() => updateSightValue()}>
+          <div
+            className={style.change_container}
+            onClick={() => updateSightValue()}
+            aria-disabled={isLoadingPost}>
             <img src={saveIcon} alt="saveIcon" />
-            <span>{isLoading ? 'Подождите, идёт загрузка' : 'Сохранить'}</span>
+            <span>{isLoadingPost ? 'Подождите, идёт загрузка' : 'Сохранить'}</span>
             {backendErrors && (
               <span style={{ color: 'red', marginTop: '20px' }}>{backendErrors}</span>
             )}

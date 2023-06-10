@@ -39,3 +39,20 @@ interface MapTypes {
   x: number;
   y: number;
 }
+
+export interface PurifyTypes {
+  rsp: Rsp;
+}
+
+export interface Rsp {
+  '@attributes': Attributes;
+  method: string;
+  lang: string;
+  format: string;
+  found: string;
+  api_key: string;
+}
+
+export interface Attributes {
+  stat: string;
+}

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export const usePurify = <T>(name: string, desc: string) => {
+export const usePurify = <T>(name: string | undefined, desc: string | undefined) => {
   return useQuery({
     queryKey: [`purifyCheck&name=${name}&desc=${desc}`],
     queryFn: async () => {

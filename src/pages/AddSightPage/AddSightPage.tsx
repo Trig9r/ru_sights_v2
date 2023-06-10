@@ -9,7 +9,7 @@ import { getUserCityName, useFilteredCities } from '@/utils/helpers';
 
 import { TYPES } from '@/constants';
 import { API_WEBPURIFY, WEBPURIFY_FORMAT } from '@/constants/api';
-import { CityTypes } from '@/@types';
+import { CityTypes, PurifyTypes } from '@/@types';
 
 import style from './AddSightPage.module.css';
 
@@ -62,6 +62,7 @@ export const AddSightPage = () => {
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
   const { data, isLoading, isError } = useCities<CityArray>('name', true);
+  const { data: dataPurify } = usePurify<PurifyTypes>(sightValue.name, sightValue.desc);
 
   // получение города пользователя через геолокацию
   const userCityGeo = getUserCityName();
@@ -121,9 +122,7 @@ export const AddSightPage = () => {
     }
 
     try {
-      const { data: dataPurify } = usePurify(sightValue.name, sightValue.desc);
-
-      const isProfanity = Number(dataPurify.found);
+      const isProfanity = Number(dataPurify?.rsp.found);
 
       if (!!isProfanity) {
         alert('В описании или названии присутсвует ругательство');

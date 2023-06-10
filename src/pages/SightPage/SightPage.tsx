@@ -160,7 +160,7 @@ export const SightPage = () => {
               <span>да</span>
             </div> */}
 
-            <div className={style.info_container} title="Дата добавления">
+            <div className={style.info_container} title="Дата добавления (изменения)">
               <img src={calendarIcon} alt="calendarIcon" />
               <span>{sight.created}</span>
             </div>

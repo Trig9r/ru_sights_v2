@@ -36,10 +36,16 @@ export const Dropdown: React.FC<DropdownProps> = ({
   const [value, setValue] = React.useState<string>('');
 
   const cityRef = React.useRef(null);
+  const inputRef = React.useRef(null);
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (cityRef.current && !event.composedPath().includes(cityRef.current)) {
+      if (
+        cityRef.current &&
+        !event.composedPath().includes(cityRef.current) &&
+        inputRef.current &&
+        !event.composedPath().includes(inputRef.current)
+      ) {
         setIsVisible(false);
       }
     };
@@ -73,6 +79,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
     setValue(e.target.value);
     updateSearchValue(e.target.value);
   };
+
+  console.log(isVisible);
 
   return (
     <>
@@ -115,7 +123,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
         <div className={`${styles.menu} ${classnames ? classnames : ''}`}>
           {isSearchable && (
             <div className={styles.search_container}>
-              <input type="search" placeholder="Поиск" onChange={onSearch} value={value} />
+              <input
+                ref={inputRef}
+                type="search"
+                placeholder="Поиск"
+                onChange={onSearch}
+                value={value}
+              />
             </div>
           )}
           {elements

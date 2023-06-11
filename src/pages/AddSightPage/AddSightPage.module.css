@@ -53,9 +53,7 @@
   margin-top: 75px;
 }
 
-.input_container,
-.dropdown_city_container,
-.dropdown_type_container {
+.input_container {
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -109,11 +107,6 @@
 
   font-size: 20px;
   margin-bottom: 10px;
-}
-
-.dropdown_type_container,
-.dropdown_city_container {
-  z-index: 1;
 }
 
 .image_previews_container {

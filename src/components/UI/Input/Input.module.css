@@ -21,7 +21,6 @@
   left: 25px;
   top: 15px;
   color: #cfcfcf;
-  z-index: 1;
   transition: transform 150ms ease-out, font-size 150ms ease-out;
   font-size: 14px;
   font-weight: var(--font-reglar);

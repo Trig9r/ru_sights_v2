@@ -113,3 +113,102 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
+
+@media (max-width: 768px) {
+  .title_container .title {
+    font-size: 28px;
+  }
+
+  .title_container .navbar {
+    font-size: 18px;
+  }
+
+  .input_container {
+    margin-top: 40px;
+    margin-left: 10px;
+  }
+
+  .input {
+    width: 340px;
+    font-size: 16px;
+  }
+
+  .dropdown {
+    width: 180px;
+    background-color: #d9d9d9;
+    color: #505050;
+
+    margin-left: 60px;
+
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .button_find {
+    width: 160px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 40px;
+  }
+
+  .line {
+    margin-top: 40px;
+  }
+
+  .sights_container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search_container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 20px;
+  }
+
+  .title_container .title {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 8px;
+  }
+
+  .title_container .navbar {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .input_container {
+    margin-top: 30px;
+    margin-left: 8px;
+  }
+
+  .input {
+    width: 250px;
+    font-size: 14px;
+  }
+
+  .dropdown {
+    width: 220px;
+
+    margin-left: 30px;
+  }
+
+  .button_find {
+    width: 140px;
+    height: 35px;
+    font-size: 14px;
+    margin-left: 30px;
+  }
+
+  .line {
+    margin-top: 30px;
+  }
+
+  .sights_container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

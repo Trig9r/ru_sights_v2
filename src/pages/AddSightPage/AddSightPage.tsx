@@ -202,7 +202,7 @@ export const AddSightPage = () => {
             />
           </div>
 
-          <div className={style.dropdown_city_container}>
+          <div className={style.dropdown_container}>
             <Dropdown
               placeholder="Город"
               elements={filteredCities}
@@ -248,7 +248,7 @@ export const AddSightPage = () => {
             </div>
           </div>
 
-          <div className={style.dropdown_type_container}>
+          <div className={style.dropdown_container}>
             <Dropdown
               placeholder="Тип"
               selectedValue={selectedType.name}

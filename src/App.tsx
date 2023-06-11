@@ -4,6 +4,7 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -47,6 +48,7 @@ function App() {
         <RouterProvider router={router} />
       </div>
       <ReactQueryDevtools />
+      <Analytics />
     </QueryClientProvider>
   );
 }

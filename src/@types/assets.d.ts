@@ -33,6 +33,7 @@ export interface ImgTypes {
 export interface MainImgTypes {
   img_name: string;
   location: string;
+  blurhash: string;
 }
 
 interface MapTypes {

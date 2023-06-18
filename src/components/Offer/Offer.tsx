@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/UI';
 import { useMainImg } from '@/utils/api/hooks';
-import { getRandomInt } from '@/utils/helpers';
 
 import { MainImgTypes } from '@/@types';
 

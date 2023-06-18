@@ -1,4 +1,9 @@
+.input_container {
+  position: relative;
+}
+
 .input {
+  position: relative;
   padding-left: 10px;
   padding-bottom: 5px;
 }
@@ -7,4 +12,10 @@
   font-family: var(--font-family-side);
   color: #bebebe;
   font-size: 16px;
+}
+
+.delete {
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 
 import viewsIcon from '@/styles/static/icons/views.svg';
-import waletIcon from '@/styles/static/icons/walet.svg';
 import placeIcon from '@/styles/static/icons/place.svg';
 import favouriteIcon from '@/styles/static/icons/favourite.svg';
 import calendarIcon from '@/styles/static/icons/calendar.svg';
@@ -199,7 +199,7 @@ export const SightPage = () => {
       </div>
 
       <div className={style.desc_container}>
-        <div className={style.text_desc}>{sight.description}</div>
+        <ReactMarkdown children={sight.description} className={style.text_desc} />
       </div>
 
       <div className={style.map_container}>

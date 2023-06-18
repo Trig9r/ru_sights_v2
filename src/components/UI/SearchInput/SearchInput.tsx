@@ -1,6 +1,8 @@
 import React from 'react';
 import { debounce } from 'lodash';
 
+import deleteIcon from './img/delete.svg';
+
 import style from './SearchInput.module.css';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -23,13 +25,28 @@ export const SearchInput: React.FC<InputProps> = ({ value, classes, setSearchVal
     updateSearchValue(e.target.value);
   };
 
+  const handleClickDeleteValue = () => {
+    setValue('');
+    updateSearchValue('');
+  };
+
   return (
-    <input
-      placeholder="Поиск"
-      type="text"
-      value={value}
-      onChange={onSearch}
-      className={`${classes} ${style.input}`}
-    />
+    <div className={style.input_container}>
+      <input
+        placeholder="Поиск"
+        type="text"
+        value={value}
+        onChange={onSearch}
+        className={`${classes} ${style.input}`}
+      />
+      {value && (
+        <img
+          src={deleteIcon}
+          alt="deleteIcon"
+          className={style.delete}
+          onClick={handleClickDeleteValue}
+        />
+      )}
+    </div>
   );
 };

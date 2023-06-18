@@ -8,7 +8,9 @@ export const Footer = () => {
       <div className={style.footer_container}>
         <div className={style.footer_content}>
           <ul className={style.footer_info}>
-            <li>Контакты </li>
+            <Link to="/aboutUs">
+              <li>Контакты </li>
+            </Link>
             <li>Политика конфиденциальности </li>
             <li>Условия использования </li>
             <li>Отказ от ответственности </li>

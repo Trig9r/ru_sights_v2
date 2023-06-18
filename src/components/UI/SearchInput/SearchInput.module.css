@@ -18,4 +18,9 @@
   position: absolute;
   right: 5px;
   top: 5px;
+  cursor: pointer;
+}
+
+.delete:active {
+  transform: scale(0.98);
 }

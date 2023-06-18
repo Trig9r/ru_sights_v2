@@ -68,8 +68,8 @@
 
 .search_container {
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+  justify-content: space-evenly;
+  align-items: end;
 }
 
 .dropdown {

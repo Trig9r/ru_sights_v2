@@ -92,7 +92,7 @@
 .search_container {
   display: flex;
   justify-content: space-evenly;
-  align-items: baseline;
+  align-items: end;
 }
 
 .dropdowns_container {

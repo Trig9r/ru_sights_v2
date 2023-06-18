@@ -64,7 +64,7 @@
 .search_container {
   display: flex;
   justify-content: space-around;
-  align-items: baseline;
+  align-items: end;
 }
 
 .dropdown {

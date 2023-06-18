@@ -8,6 +8,7 @@ import style from './Modal.module.css';
 interface ModalProps {
   active: boolean;
   title: string;
+  isErrorModal: boolean;
   onSubmit: () => void;
   onClose: () => void;
 }
@@ -17,6 +18,7 @@ export const Modal = ({
   title,
   onSubmit,
   onClose,
+  isErrorModal,
   children,
 }: PropsWithChildren<ModalProps>) => {
   if (!active) return <div></div>;
@@ -29,9 +31,11 @@ export const Modal = ({
         </header>
         <div className={style.modal_body}>{children}</div>
         <footer className={style.modal_footer}>
-          <Button primary classnames={style.modal_btn} onClick={onSubmit}>
-            Подтвердить
-          </Button>
+          {!isErrorModal && (
+            <Button primary classnames={style.modal_btn} onClick={onSubmit}>
+              Подтвердить
+            </Button>
+          )}
           <Button primary classnames={style.modal_btn} onClick={onClose}>
             Отмена
           </Button>

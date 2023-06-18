@@ -59,6 +59,10 @@ export const AddSightPage = () => {
   const [backendErrors, setBackendErrors] = React.useState('');
   const [isActiveModal, setIsActiveModal] = React.useState(false);
 
+  const [modalTitle, setModalTitle] = React.useState('Переход');
+  const [modalText, setModalText] = React.useState('Перейти на добавленную достопримечательность?');
+  const [isErrorModal, setIsErrorModal] = React.useState(false);
+
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
   const { data, isLoading, isError } = useCities<CityArray>('name', true);
@@ -125,9 +129,13 @@ export const AddSightPage = () => {
       const isProfanity = Number(dataPurify?.rsp.found);
 
       if (!!isProfanity) {
-        alert('В описании или названии присутсвует ругательство');
+        setModalTitle('Ошибка');
+        setModalText('В описании или названии присутсвует ругательство');
+        setIsErrorModal(true);
+        setIsActiveModal(true);
       } else {
         const formData = new FormData();
+
         formData.append('sightName', sightValue.name);
         formData.append('sightCityId', String(selectedCity.id));
         formData.append('sightDesc', sightValue.desc);
@@ -135,6 +143,7 @@ export const AddSightPage = () => {
         formData.append('sightMapCoordsX', String(placemarkCoords.X));
         formData.append('sightMapCoordsY', String(placemarkCoords.Y));
         formData.append('sightTypeId', String(selectedType.id));
+
         for (let i = 0; i < selectedImages!.length; i++) {
           formData.append('images[]', selectedImages![i]);
         }
@@ -153,14 +162,19 @@ export const AddSightPage = () => {
             },
           );
 
-          console.log('Files uploaded successfully: ', response.data);
+          // console.log('Files uploaded successfully: ', response.data);
           setIsLoadingPost(false);
           setIsActiveModal(true);
         } catch (error) {
           const { response } = error as AxiosError;
-          const { data } = response as AxiosResponse;
+          const { data: errorMessage } = response as AxiosResponse;
 
-          setBackendErrors(data.message);
+          // setBackendErrors(data.message);
+          setModalTitle('Ошибка');
+          setModalText(errorMessage);
+          setIsErrorModal(true);
+          setIsActiveModal(true);
+          setIsLoadingPost(false);
         }
       }
     } catch (error) {
@@ -300,11 +314,12 @@ export const AddSightPage = () => {
       <Footer />
 
       <Modal
-        title="Переход"
+        title={modalTitle}
         active={isActiveModal}
         onClose={handleCloseModal}
-        onSubmit={() => navigate(`/достопримечательность/${sightValue.name}`)}>
-        <div>Перейти на добавленную достопримечательность?</div>
+        onSubmit={() => navigate(`/достопримечательность/${sightValue.name}`)}
+        isErrorModal={isErrorModal}>
+        <div>{modalText}</div>
       </Modal>
     </div>
   );

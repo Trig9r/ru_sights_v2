@@ -180,6 +180,10 @@
   margin-right: 58px;
 }
 
+.place_text {
+  word-wrap: break-word;
+}
+
 .desc_container {
   max-width: 1150px;
   margin: 0 auto;
